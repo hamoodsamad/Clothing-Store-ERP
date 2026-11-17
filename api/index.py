@@ -97,12 +97,43 @@ def write_db(data):
     with open(db_file, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def extract_endpoint(path):
-    if path.startswith("/api/"):
-        return path[5:]
-    if path.startswith("api/"):
-        return path[4:]
-    return path.lstrip("/")
+def extract_endpoint(path, headers=None, query=None):
+    # 1. Query parameter forwarded by Vercel rewrite (__endpoint)
+    if query and "__endpoint" in query:
+        ep = query["__endpoint"][0].strip()
+        if ep.startswith("/api/"):
+            return ep[5:].lstrip("/")
+        if ep.startswith("api/"):
+            return ep[4:].lstrip("/")
+        return ep.lstrip("/")
+
+    # 2. Vercel / proxy headers containing original path
+    if headers:
+        for header_key in ["x-matched-path", "x-forwarded-uri", "x-vercel-matched-path", "x-original-uri"]:
+            val = headers.get(header_key)
+            if val and "/api" in val:
+                val = val.split("?", 1)[0]
+                if "/api/" in val:
+                    return val.split("/api/", 1)[1].lstrip("/")
+                elif val.endswith("/api") or val == "/api":
+                    return ""
+                elif "api/" in val:
+                    return val.split("api/", 1)[1].lstrip("/")
+
+    # 3. Direct path matching
+    clean_path = path.split("?", 1)[0]
+    if clean_path.startswith("/api/"):
+        clean_path = clean_path[5:]
+    elif clean_path.startswith("api/"):
+        clean_path = clean_path[4:]
+    else:
+        clean_path = clean_path.lstrip("/")
+
+    # If the rewritten path is literally "index" or "index.py", don't treat it as endpoint
+    if clean_path in ["index", "index.py"]:
+        return ""
+
+    return clean_path
 
 class handler(BaseHTTPRequestHandler):
     def end_headers(self):
@@ -134,7 +165,7 @@ class handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
         query = parse_qs(parsed.query)
-        endpoint = extract_endpoint(path)
+        endpoint = extract_endpoint(path, self.headers, query)
 
         if not endpoint or endpoint in ["", "api", "health"]:
             return self.send_json({
@@ -149,19 +180,22 @@ class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
-        endpoint = extract_endpoint(path)
+        query = parse_qs(parsed.query)
+        endpoint = extract_endpoint(path, self.headers, query)
         self.handle_api_post(endpoint)
 
     def do_PUT(self):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
-        endpoint = extract_endpoint(path)
+        query = parse_qs(parsed.query)
+        endpoint = extract_endpoint(path, self.headers, query)
         self.handle_api_put(endpoint)
 
     def do_DELETE(self):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
-        endpoint = extract_endpoint(path)
+        query = parse_qs(parsed.query)
+        endpoint = extract_endpoint(path, self.headers, query)
         self.handle_api_delete(endpoint)
 
     def handle_api_get(self, endpoint, query):
