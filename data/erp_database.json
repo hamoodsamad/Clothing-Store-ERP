@@ -21,12 +21,12 @@
       "size": "4.5 Meters",
       "cost_price": 2600.0,
       "selling_price": 4800.0,
-      "stock_quantity": 43,
+      "stock_quantity": 42,
       "min_stock_alert": 10,
       "supplier_id": "SUP-001",
       "description": "Wrinkle-resistant premium fabric designed for corporate and executive year-round wear.",
       "created_at": "2026-11-01 10:00:00",
-      "updated_at": "2026-11-17 17:43:38"
+      "updated_at": "2026-11-17 17:47:00"
     },
     {
       "id": "PRD-1002",
@@ -249,8 +249,8 @@
       "phone": "0300-0000000",
       "address": "Gujranwala",
       "city": "Gujranwala",
-      "total_purchases": 22300.0,
-      "total_orders": 1,
+      "total_purchases": 27100.0,
+      "total_orders": 2,
       "created_at": "2026-11-17 17:34:38"
     }
   ],
@@ -928,6 +928,38 @@
       "total_profit": 8200.0,
       "payment_method": "Cash",
       "amount_paid": 22300,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "POS Counter Sale Checkout"
+    },
+    {
+      "id": "INV-1016",
+      "invoice_number": "INV-1016",
+      "customer_id": "CUST-007",
+      "customer_name": "Walk-in Customer",
+      "customer_phone": "0300-0000000",
+      "date": "2026-11-17",
+      "items": [
+        {
+          "product_id": "PRD-1001",
+          "barcode": "8901001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "color": "Midnight Navy",
+          "quantity": 1,
+          "unit_cost": 2600.0,
+          "unit_price": 4800,
+          "total": 4800,
+          "profit": 2200.0
+        }
+      ],
+      "subtotal": 4800.0,
+      "discount": 0,
+      "tax": 0.0,
+      "grand_total": 4800.0,
+      "total_cost": 2600.0,
+      "total_profit": 2200.0,
+      "payment_method": "Cash",
+      "amount_paid": 4800,
       "change_due": 0.0,
       "status": "Paid",
       "notes": "POS Counter Sale Checkout"

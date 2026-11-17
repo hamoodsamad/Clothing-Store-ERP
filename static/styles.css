@@ -766,6 +766,8 @@ body {
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow-lg);
   padding: 24px;
@@ -813,6 +815,9 @@ body {
 }
 
 .form-control {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 9px 12px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -822,8 +827,45 @@ body {
   font-size: 13.5px;
 }
 
+select.form-control {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
 .form-control:focus {
   border-color: var(--brand-primary);
+}
+
+/* Return & Exchange Styles */
+.exchange-product-box {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding: 14px;
+  background: rgba(4, 120, 87, 0.05);
+  border: 1.5px solid var(--brand-primary);
+  border-radius: 10px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.exchange-grid-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+  min-width: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.exchange-grid-inputs > div {
+  min-width: 0;
 }
 
 /* Return Option Cards */
@@ -832,6 +874,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 14px;
   margin: 16px 0;
+  min-width: 0;
 }
 
 .return-option-card {
@@ -845,6 +888,8 @@ body {
   align-items: center;
   text-align: center;
   gap: 8px;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .return-option-card:hover {
@@ -854,6 +899,15 @@ body {
 .return-option-card.selected {
   border-color: var(--brand-primary);
   background-color: rgba(4, 120, 87, 0.08);
+}
+
+@media (max-width: 580px) {
+  .return-options-container {
+    grid-template-columns: 1fr;
+  }
+  .exchange-grid-inputs {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Printable Thermal Receipt */

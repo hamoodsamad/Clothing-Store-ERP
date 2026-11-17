@@ -1033,16 +1033,16 @@
 
   <!-- Modal: Process Return & Exchange Modal -->
   <div id="returnModal" class="modal-overlay">
-    <div class="modal-card" style="max-width: 540px;">
+    <div class="modal-card" style="max-width: 540px; width: 100%; box-sizing: border-box; overflow-x: hidden;">
       <div class="modal-header">
         <h3 style="font-size: 16px; font-weight: 700; color: var(--brand-primary);">
-          🔄 Return & Exchange Processing / مال کی تبدیلی و واپسی
+          🔄 Customer Return & Exchange Processing
         </h3>
         <button class="close-btn" onclick="closeModal('returnModal')">✕</button>
       </div>
 
       <!-- Returned Item Summary Box -->
-      <div style="padding: 12px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 14px;">
+      <div style="padding: 12px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 14px; box-sizing: border-box; width: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div style="font-size: 14px; font-weight: 700; color: var(--text-primary);" id="retModalSuitName">Imperial Super Wash & Wear Suit</div>
           <span class="badge badge-warning" style="font-size: 11px;">Returned Item</span>
@@ -1050,21 +1050,21 @@
         <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
           Customer: <b id="retModalCustName" style="color: var(--text-primary);">Malik Tariq</b> | 
           Invoice: <b id="retModalInvNum" style="color: var(--brand-gold);">INV-1001</b> | 
-          Rate: <b id="retModalUnitPrice" style="color: var(--brand-primary);">Rs. 4,800</b>
+          Unit Rate: <b id="retModalUnitPrice" style="color: var(--brand-primary);">Rs. 4,800</b>
         </div>
       </div>
 
       <!-- Return Quantity -->
-      <div class="form-group" style="margin-bottom: 14px;">
+      <div class="form-group" style="margin-bottom: 14px; width: 100%; box-sizing: border-box;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <label class="form-label" style="margin-bottom: 0;">Quantity to Return (واپسی تعداد):</label>
-          <span style="font-size: 12px; color: var(--text-muted);">Credit: <b id="retTotalCreditBadge" style="color: var(--brand-red);">Rs. 4,800</b></span>
+          <label class="form-label" style="margin-bottom: 0;">Number of Suits to Return (Quantity):</label>
+          <span style="font-size: 12px; color: var(--text-muted);">Return Credit: <b id="retTotalCreditBadge" style="color: var(--brand-red);">Rs. 4,800</b></span>
         </div>
         <input type="number" id="retModalQty" class="form-control" value="1" min="1" max="10" oninput="calculateExchangeDiff()" style="margin-top: 6px;">
       </div>
 
       <!-- Return Type Selector -->
-      <div class="form-label">What is the customer requesting? (کسٹمر کی ضرورت):</div>
+      <div class="form-label">Select Return Action:</div>
       <div class="return-options-container" style="margin-bottom: 14px;">
         <!-- Option 1: Return & Exchange -->
         <div class="return-option-card selected" id="optSuitExchange" onclick="selectReturnType('SUIT_EXCHANGE')">
@@ -1080,27 +1080,29 @@
           <div style="font-size: 24px;">💵</div>
           <div style="font-weight: 700; font-size: 13.5px;">Cash Refund Only</div>
           <div style="font-size: 11px; color: var(--text-muted);">
-            Customer only wants cash money back. No replacement suit.
+            Direct cash refund paid to customer. No replacement suit.
           </div>
         </div>
       </div>
 
       <!-- Exchange Product Section (Active when SUIT_EXCHANGE is selected) -->
-      <div id="exchangeProductSection" style="padding: 12px; background: rgba(4, 120, 87, 0.05); border: 1.5px solid var(--brand-primary); border-radius: 8px; margin-bottom: 14px;">
-        <label class="form-label" style="color: var(--brand-primary); font-weight: 700;">
-          🛍️ Select New Suit Picked in Exchange (تبدیلی میں نیا پسند کیا گیا سوٹ):
+      <div id="exchangeProductSection" class="exchange-product-box">
+        <label class="form-label" style="color: var(--brand-primary); font-weight: 700; display: block; margin-bottom: 6px;">
+          🛍️ Select New Replacement Suit Picked by Customer:
         </label>
-        <select id="exchangeNewProductSelect" class="form-control" onchange="calculateExchangeDiff()" style="font-weight: 600;">
-          <!-- Dynamically populated from allProducts -->
-        </select>
+        <div style="width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden;">
+          <select id="exchangeNewProductSelect" class="form-control" onchange="calculateExchangeDiff()" style="font-weight: 600; width: 100%; max-width: 100%; box-sizing: border-box;">
+            <!-- Dynamically populated from allProducts -->
+          </select>
+        </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+        <div class="exchange-grid-inputs">
           <div>
-            <label class="form-label">New Suit Qty (نئی تعداد):</label>
+            <label class="form-label">Replacement Quantity:</label>
             <input type="number" id="exchangeNewQty" class="form-control" value="1" min="1" oninput="calculateExchangeDiff()">
           </div>
           <div>
-            <label class="form-label">Payment Mode for Difference:</label>
+            <label class="form-label">Payment Mode for Balance:</label>
             <select id="exchangePaymentMethod" class="form-control">
               <option value="Cash">Cash Counter</option>
               <option value="Card">Card POS</option>
@@ -1110,26 +1112,26 @@
         </div>
 
         <!-- Live Calculation Breakdown Card -->
-        <div style="margin-top: 12px; padding: 10px; background: var(--bg-card); border-radius: 6px; font-size: 12.5px;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-            <span style="color: var(--text-muted);">Returned Suit Credit (واپسی مال کی رقم):</span>
+        <div style="margin-top: 12px; padding: 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; font-size: 12.5px; box-sizing: border-box; width: 100%;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="color: var(--text-muted);">Returned Item Credit:</span>
             <span id="retCreditDisplay" style="color: var(--brand-red); font-weight: 700;">- Rs. 4,800</span>
           </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-            <span style="color: var(--text-muted);">New Exchanged Suit Cost (نئے سوٹ کی قیمت):</span>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="color: var(--text-muted);">New Replacement Suit Cost:</span>
             <span id="newSuitTotalDisplay" style="color: var(--brand-primary); font-weight: 700;">+ Rs. 6,900</span>
           </div>
-          <div style="border-top: 1px dashed var(--border-color); margin: 6px 0;"></div>
+          <div style="border-top: 1px dashed var(--border-color); margin: 8px 0;"></div>
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span id="exchangeDiffLabel" style="font-weight: 700; color: var(--text-primary);">Customer to Pay Difference:</span>
+            <span id="exchangeDiffLabel" style="font-weight: 700; color: var(--text-primary);">Customer to Pay Balance:</span>
             <span id="exchangeDiffAmount" style="font-size: 15px; font-weight: 800; color: var(--brand-gold);">+ Rs. 2,100</span>
           </div>
         </div>
       </div>
 
       <!-- Reason for return -->
-      <div class="form-group" style="margin-bottom: 14px;">
-        <label class="form-label">Reason for Return / Exchange (وجہ / تفصیل):</label>
+      <div class="form-group" style="margin-bottom: 14px; width: 100%; box-sizing: border-box;">
+        <label class="form-label">Reason for Return / Exchange:</label>
         <input type="text" id="retModalReason" class="form-control" placeholder="e.g. Size exchange, color preference, upgrade to Boski...">
       </div>
 
@@ -1146,7 +1148,7 @@
 
   <!-- Modal: Exchange & Return Thermal Slip Modal -->
   <div id="exchangeSlipModal" class="modal-overlay">
-    <div class="modal-card" style="max-width: 440px;">
+    <div class="modal-card" style="max-width: 440px; width: 100%; box-sizing: border-box; overflow-x: hidden;">
       <div class="modal-header">
         <h3 style="font-size: 16px; font-weight: 700;">🔄 Return & Exchange Thermal Slip</h3>
         <button class="close-btn" onclick="closeModal('exchangeSlipModal')">✕</button>
@@ -1179,7 +1181,7 @@
 
         <!-- 1. Returned Item Table -->
         <div style="font-size: 11px; font-weight: bold; color: #dc2626; margin-bottom: 2px;">
-          [1] RETURNED PRODUCT (واپسی):
+          [1] RETURNED PRODUCT (CREDIT):
         </div>
         <table class="receipt-table" style="margin: 2px 0;">
           <thead>
@@ -1198,7 +1200,7 @@
         <!-- 2. Exchanged New Item Table -->
         <div id="slipExchangeSection" style="margin-top: 6px;">
           <div style="font-size: 11px; font-weight: bold; color: #047857; margin-bottom: 2px;">
-            [2] NEW REPLACEMENT SUIT (تبدیلی میں نیا خریدا گیا سوٹ):
+            [2] NEW REPLACEMENT SUIT (DEBIT):
           </div>
           <table class="receipt-table" style="margin: 2px 0;">
             <thead>
@@ -1219,7 +1221,7 @@
 
         <!-- Financial Breakdown -->
         <div style="display: flex; justify-content: space-between; font-size: 11px; margin: 2px 0;">
-          <span>Returned Suit Credit:</span>
+          <span>Returned Item Credit:</span>
           <span id="slipCreditTotal" style="color: #dc2626; font-weight: bold;">- Rs. 0</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 11px; margin: 2px 0;" id="slipNewTotalRow">
@@ -1229,7 +1231,7 @@
         <div class="receipt-divider"></div>
 
         <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin: 4px 0;" id="slipNetAdjustmentRow">
-          <span id="slipNetLabel">Net Difference:</span>
+          <span id="slipNetLabel">Net Balance:</span>
           <span id="slipNetAmount">Rs. 0</span>
         </div>
 

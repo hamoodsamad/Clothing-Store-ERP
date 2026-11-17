@@ -1072,13 +1072,13 @@ function populateExchangeProductDropdown(excludeProductId = null) {
 
   const validProducts = allProducts.filter(p => p.id !== excludeProductId && p.stock_quantity > 0);
   if (validProducts.length === 0) {
-    sel.innerHTML = `<option value="">-- No other suits currently in stock --</option>`;
+    sel.innerHTML = `<option value="">-- No replacement suits in stock --</option>`;
     return;
   }
 
   sel.innerHTML = validProducts.map(p => `
     <option value="${p.id}" data-price="${p.selling_price}" data-stock="${p.stock_quantity}">
-      ${p.name} (${p.color || p.fabric}) — Rs. ${p.selling_price.toLocaleString()} (In Stock: ${p.stock_quantity} Pcs)
+      ${p.name} — Rs. ${p.selling_price.toLocaleString()} (${p.stock_quantity} Pcs available)
     </option>
   `).join('');
 }
@@ -1112,15 +1112,15 @@ function calculateExchangeDiff() {
 
   if (diffLabel && diffAmount) {
     if (diff > 0) {
-      diffLabel.textContent = 'Customer to Pay Difference (کسٹمر ادا کرے گا):';
+      diffLabel.textContent = 'Customer to Pay Balance:';
       diffAmount.textContent = `+ Rs. ${diff.toLocaleString()}`;
       diffAmount.style.color = 'var(--brand-gold)';
     } else if (diff < 0) {
-      diffLabel.textContent = 'Store to Refund Difference (دکان واپس کرے گی):';
+      diffLabel.textContent = 'Store to Refund Balance:';
       diffAmount.textContent = `- Rs. ${Math.abs(diff).toLocaleString()}`;
       diffAmount.style.color = 'var(--brand-primary)';
     } else {
-      diffLabel.textContent = 'Even Exchange (برابر تبادلہ - صفر بقایا):';
+      diffLabel.textContent = 'Even Exchange (Zero Balance):';
       diffAmount.textContent = 'Rs. 0 (Even Exchange)';
       diffAmount.style.color = 'var(--brand-primary)';
     }
@@ -1308,11 +1308,11 @@ function showExchangeSlipModal(slip) {
   const netAmount = document.getElementById('slipNetAmount');
 
   if (net > 0) {
-    netLabel.textContent = 'CUSTOMER PAID DIFFERENCE:';
+    netLabel.textContent = 'CUSTOMER PAID BALANCE:';
     netAmount.textContent = `+ Rs. ${net.toLocaleString()}`;
     netAmount.style.color = '#b45309';
   } else if (net < 0) {
-    netLabel.textContent = 'STORE REFUNDED DIFFERENCE:';
+    netLabel.textContent = 'STORE REFUNDED BALANCE:';
     netAmount.textContent = `- Rs. ${Math.abs(net).toLocaleString()}`;
     netAmount.style.color = '#047857';
   } else {
