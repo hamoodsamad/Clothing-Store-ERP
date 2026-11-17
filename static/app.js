@@ -1062,7 +1062,70 @@ function openAddCustomerModal() {
   });
 }
 
-// ======================== Returns & Refunds ========================
+// ======================== Returns & Exchange Engine ========================
+
+let allSalesReturnsData = [];
+
+function populateExchangeProductDropdown(excludeProductId = null) {
+  const sel = document.getElementById('exchangeNewProductSelect');
+  if (!sel) return;
+
+  const validProducts = allProducts.filter(p => p.id !== excludeProductId && p.stock_quantity > 0);
+  if (validProducts.length === 0) {
+    sel.innerHTML = `<option value="">-- No other suits currently in stock --</option>`;
+    return;
+  }
+
+  sel.innerHTML = validProducts.map(p => `
+    <option value="${p.id}" data-price="${p.selling_price}" data-stock="${p.stock_quantity}">
+      ${p.name} (${p.color || p.fabric}) — Rs. ${p.selling_price.toLocaleString()} (In Stock: ${p.stock_quantity} Pcs)
+    </option>
+  `).join('');
+}
+
+function calculateExchangeDiff() {
+  if (!selectedReturnItem) return;
+
+  const qtyInput = document.getElementById('retModalQty');
+  const returnQty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+  const returnCredit = (selectedReturnItem.unit_price || 0) * returnQty;
+
+  const creditBadge = document.getElementById('retTotalCreditBadge');
+  const creditDisplay = document.getElementById('retCreditDisplay');
+  if (creditBadge) creditBadge.textContent = `Rs. ${returnCredit.toLocaleString()}`;
+  if (creditDisplay) creditDisplay.textContent = `- Rs. ${returnCredit.toLocaleString()}`;
+
+  const sel = document.getElementById('exchangeNewProductSelect');
+  const selectedOpt = sel ? sel.options[sel.selectedIndex] : null;
+  const newPrice = selectedOpt ? (parseFloat(selectedOpt.getAttribute('data-price')) || 0) : 0;
+
+  const newQtyInput = document.getElementById('exchangeNewQty');
+  const newQty = Math.max(1, parseInt(newQtyInput.value, 10) || 1);
+  const newTotal = newPrice * newQty;
+
+  const newTotalDisplay = document.getElementById('newSuitTotalDisplay');
+  if (newTotalDisplay) newTotalDisplay.textContent = `+ Rs. ${newTotal.toLocaleString()}`;
+
+  const diff = newTotal - returnCredit;
+  const diffLabel = document.getElementById('exchangeDiffLabel');
+  const diffAmount = document.getElementById('exchangeDiffAmount');
+
+  if (diffLabel && diffAmount) {
+    if (diff > 0) {
+      diffLabel.textContent = 'Customer to Pay Difference (کسٹمر ادا کرے گا):';
+      diffAmount.textContent = `+ Rs. ${diff.toLocaleString()}`;
+      diffAmount.style.color = 'var(--brand-gold)';
+    } else if (diff < 0) {
+      diffLabel.textContent = 'Store to Refund Difference (دکان واپس کرے گی):';
+      diffAmount.textContent = `- Rs. ${Math.abs(diff).toLocaleString()}`;
+      diffAmount.style.color = 'var(--brand-primary)';
+    } else {
+      diffLabel.textContent = 'Even Exchange (برابر تبادلہ - صفر بقایا):';
+      diffAmount.textContent = 'Rs. 0 (Even Exchange)';
+      diffAmount.style.color = 'var(--brand-primary)';
+    }
+  }
+}
 
 function openReturnModalFromHistory(invoiceId, invoiceNumber, custName, productId, productName, unitPrice, maxQty) {
   selectedReturnItem = {
@@ -1084,22 +1147,56 @@ function openReturnModalFromHistory(invoiceId, invoiceNumber, custName, productI
   qtyInput.value = 1;
   qtyInput.max = maxQty;
 
+  populateExchangeProductDropdown(productId);
   selectReturnType('SUIT_EXCHANGE');
+  calculateExchangeDiff();
+
   document.getElementById('returnModal').classList.add('active');
+}
+
+function openReturnModalForInvoice(invId) {
+  const inv = allInvoicesData.find(i => i.id === invId || i.invoice_number === invId);
+  if (!inv) return alert('Invoice not found');
+  if (!inv.items || inv.items.length === 0) return alert('No items found in this invoice');
+
+  let chosenItem = inv.items[0];
+  if (inv.items.length > 1) {
+    const list = inv.items.map((it, idx) => `${idx + 1}. ${it.name} (${it.color}) - Qty: ${it.quantity} Pcs @ Rs. ${it.unit_price}`).join('\n');
+    const pick = prompt(`This invoice has multiple items. Choose which suit customer is returning (1 to ${inv.items.length}):\n${list}`, '1');
+    if (!pick) return;
+    const index = parseInt(pick, 10) - 1;
+    if (index >= 0 && index < inv.items.length) {
+      chosenItem = inv.items[index];
+    }
+  }
+
+  openReturnModalFromHistory(
+    inv.id,
+    inv.invoice_number,
+    inv.customer_name,
+    chosenItem.product_id,
+    chosenItem.name,
+    chosenItem.unit_price,
+    chosenItem.quantity
+  );
 }
 
 function selectReturnType(type) {
   selectedReturnType = type;
   const optExchange = document.getElementById('optSuitExchange');
   const optRefund = document.getElementById('optCashRefund');
+  const exchangeSection = document.getElementById('exchangeProductSection');
 
   if (type === 'SUIT_EXCHANGE') {
     optExchange.classList.add('selected');
     optRefund.classList.remove('selected');
+    if (exchangeSection) exchangeSection.style.display = 'block';
   } else {
     optRefund.classList.add('selected');
     optExchange.classList.remove('selected');
+    if (exchangeSection) exchangeSection.style.display = 'none';
   }
+  calculateExchangeDiff();
 }
 
 async function submitReturnProcess() {
@@ -1108,12 +1205,19 @@ async function submitReturnProcess() {
   const qty = parseInt(document.getElementById('retModalQty').value, 10) || 1;
   const reason = document.getElementById('retModalReason').value || 'Customer return or exchange';
 
+  const exchangePid = selectedReturnType === 'SUIT_EXCHANGE' ? document.getElementById('exchangeNewProductSelect').value : null;
+  const exchangeQty = selectedReturnType === 'SUIT_EXCHANGE' ? (parseInt(document.getElementById('exchangeNewQty').value, 10) || 1) : 0;
+  const paymentMethod = document.getElementById('exchangePaymentMethod').value || 'Cash';
+
   const payload = {
     invoice_id: selectedReturnItem.invoice_id,
     product_id: selectedReturnItem.product_id,
     quantity: qty,
     return_type: selectedReturnType,
     reason,
+    exchange_product_id: exchangePid,
+    exchange_quantity: exchangeQty,
+    payment_method: paymentMethod
   };
 
   try {
@@ -1125,50 +1229,162 @@ async function submitReturnProcess() {
 
     const data = await res.json();
     if (res.ok && data.success) {
-      alert(`✅ ${data.message}`);
       closeModal('returnModal');
 
-      // Refresh all lists
+      // Refresh data
       loadSalesReturns();
       loadInventory();
       loadOverview();
       loadCustomers();
+      loadInvoices();
+
       if (selectedReturnItem.customer_name) {
         viewCustomerFullHistory(selectedReturnItem.customer_name);
       }
+
+      // Automatically show and print thermal exchange slip
+      if (data.exchange_slip) {
+        showExchangeSlipModal(data.exchange_slip);
+      } else {
+        alert(`✅ ${data.message}`);
+      }
     } else {
-      alert(`❌ Error processing return: ${data[1] || 'Failed'}`);
+      alert(`❌ Error processing return: ${data.error || 'Failed'}`);
     }
   } catch (err) {
     console.error('Error processing return:', err);
   }
 }
 
+// Thermal Return & Exchange Slip Modal Display
+function showExchangeSlipModal(slip) {
+  document.getElementById('slipId').textContent = slip.id;
+  document.getElementById('slipDate').textContent = slip.date;
+  document.getElementById('slipTime').textContent = slip.created_at ? slip.created_at.split(' ')[1] : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('slipInvoiceRef').textContent = slip.invoice_number || slip.invoice_id;
+  document.getElementById('slipCustName').textContent = slip.customer_name;
+  document.getElementById('slipCustPhone').textContent = slip.customer_phone || '-';
+
+  // 1. Returned Table
+  const retTable = document.getElementById('slipReturnedTableBody');
+  retTable.innerHTML = `
+    <tr>
+      <td>${slip.product_name} ${slip.color ? '(' + slip.color + ')' : ''}</td>
+      <td>${slip.quantity}</td>
+      <td>Rs. ${(slip.unit_price || 0).toLocaleString()}</td>
+      <td style="color: #dc2626; font-weight: bold;">- Rs. ${(slip.returned_credit || slip.refund_amount || 0).toLocaleString()}</td>
+    </tr>
+  `;
+
+  // 2. Exchanged New Item Table
+  const exchSec = document.getElementById('slipExchangeSection');
+  const exchTable = document.getElementById('slipExchangeTableBody');
+  const exchTotalRow = document.getElementById('slipNewTotalRow');
+
+  if (slip.exchange_item) {
+    if (exchSec) exchSec.style.display = 'block';
+    if (exchTotalRow) exchTotalRow.style.display = 'flex';
+    exchTable.innerHTML = `
+      <tr>
+        <td>${slip.exchange_item.name} ${slip.exchange_item.color ? '(' + slip.exchange_item.color + ')' : ''}</td>
+        <td>${slip.exchange_item.quantity}</td>
+        <td>Rs. ${slip.exchange_item.unit_price.toLocaleString()}</td>
+        <td style="color: #047857; font-weight: bold;">+ Rs. ${slip.exchange_item.total.toLocaleString()}</td>
+      </tr>
+    `;
+    document.getElementById('slipNewTotal').textContent = `+ Rs. ${slip.exchange_item.total.toLocaleString()}`;
+  } else {
+    if (exchSec) exchSec.style.display = 'none';
+    if (exchTotalRow) exchTotalRow.style.display = 'none';
+    exchTable.innerHTML = '';
+  }
+
+  // Breakdown
+  const credit = slip.returned_credit || slip.refund_amount || 0;
+  document.getElementById('slipCreditTotal').textContent = `- Rs. ${credit.toLocaleString()}`;
+
+  const net = slip.net_difference !== undefined ? slip.net_difference : -credit;
+  const netLabel = document.getElementById('slipNetLabel');
+  const netAmount = document.getElementById('slipNetAmount');
+
+  if (net > 0) {
+    netLabel.textContent = 'CUSTOMER PAID DIFFERENCE:';
+    netAmount.textContent = `+ Rs. ${net.toLocaleString()}`;
+    netAmount.style.color = '#b45309';
+  } else if (net < 0) {
+    netLabel.textContent = 'STORE REFUNDED DIFFERENCE:';
+    netAmount.textContent = `- Rs. ${Math.abs(net).toLocaleString()}`;
+    netAmount.style.color = '#047857';
+  } else {
+    netLabel.textContent = 'EVEN EXCHANGE:';
+    netAmount.textContent = 'Rs. 0 (Even Value)';
+    netAmount.style.color = '#047857';
+  }
+
+  document.getElementById('slipPaymentMethod').textContent = slip.payment_method || 'Cash Counter';
+  document.getElementById('slipReason').textContent = slip.reason || 'Customer Exchange';
+
+  document.getElementById('exchangeSlipModal').classList.add('active');
+}
+
+function printExchangeSlip() {
+  window.print();
+}
+
+function reprintExchangeSlip(slipId) {
+  const slip = allSalesReturnsData.find(s => s.id === slipId);
+  if (!slip) return alert('Return slip not found');
+  showExchangeSlipModal(slip);
+}
+
 async function loadSalesReturns() {
   try {
     const res = await fetch(`${API_BASE}/returns`);
-    const returns = await res.json();
+    allSalesReturnsData = await res.json();
     const tbody = document.getElementById('salesReturnsTableBody');
     if (!tbody) return;
 
-    if (returns.length === 0) {
+    if (allSalesReturnsData.length === 0) {
       tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;">No returns recorded yet.</td></tr>`;
       return;
     }
 
-    tbody.innerHTML = returns.map(r => `
-      <tr>
-        <td><b>${r.id}</b></td>
-        <td>${r.date}</td>
-        <td>${r.invoice_id}</td>
-        <td><b>${r.customer_name}</b></td>
-        <td>${r.product_name}</td>
-        <td>${r.quantity} Pcs</td>
-        <td><b style="color: var(--brand-red);">Rs. ${r.refund_amount.toLocaleString()}</b></td>
-        <td><span class="badge ${r.return_type.includes('Exchange') || r.return_type.includes('Restock') ? 'badge-info' : 'badge-warning'}">${r.return_type}</span></td>
-        <td>${r.reason}</td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = allSalesReturnsData.map(r => {
+      const isExch = r.exchange_item || (r.return_type && r.return_type.includes('Exchange'));
+      const exchText = r.exchange_item ? `${r.exchange_item.name} (x${r.exchange_item.quantity})` : '—';
+      
+      let adjText = '';
+      if (r.net_difference !== undefined) {
+        if (r.net_difference > 0) {
+          adjText = `<span class="badge badge-warning">+Rs. ${r.net_difference.toLocaleString()} (Paid)</span>`;
+        } else if (r.net_difference < 0) {
+          adjText = `<span class="badge badge-info">-Rs. ${Math.abs(r.net_difference).toLocaleString()} (Refund)</span>`;
+        } else {
+          adjText = `<span class="badge badge-success">Rs. 0 (Even)</span>`;
+        }
+      } else {
+        adjText = `<b style="color: var(--brand-red);">-Rs. ${r.refund_amount.toLocaleString()}</b>`;
+      }
+
+      return `
+        <tr>
+          <td><b>${r.id}</b></td>
+          <td>${r.date}</td>
+          <td><span style="color: var(--brand-gold); font-weight: 700;">${r.invoice_id}</span></td>
+          <td><b>${r.customer_name}</b></td>
+          <td>${r.product_name} (${r.quantity} Pcs)</td>
+          <td><span style="color: var(--brand-primary); font-weight: 600;">${exchText}</span></td>
+          <td>${adjText}</td>
+          <td><span style="font-size: 11.5px; color: var(--text-muted);">${r.reason}</span></td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="reprintExchangeSlip('${r.id}')">
+              <span>🖨️</span>
+              <span>Slip</span>
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
   } catch (err) {
     console.error('Failed to load sales returns:', err);
   }
@@ -1202,14 +1418,17 @@ function renderInvoicesTable(invoices) {
       <td><b>${inv.invoice_number}</b></td>
       <td>${inv.date}</td>
       <td><span style="font-weight: 700; color: var(--brand-primary);">${inv.customer_name}</span></td>
-      <td>${inv.customer_phone}</td>
+      <td>${inv.customer_phone || '-'}</td>
       <td>${inv.items.map(i => `${i.name} (x${i.quantity})`).join(', ')}</td>
       <td><b style="font-size: 14px;">Rs. ${inv.grand_total.toLocaleString()}</b></td>
       <td><span class="badge badge-success">+Rs. ${inv.total_profit.toLocaleString()}</span></td>
       <td><span class="badge badge-info">${inv.payment_method}</span></td>
-      <td><span class="badge ${inv.status.includes('Returned') ? 'badge-danger' : 'badge-success'}">${inv.status}</span></td>
+      <td><span class="badge ${inv.status.includes('Returned') || inv.status.includes('Exchanged') ? 'badge-danger' : 'badge-success'}">${inv.status}</span></td>
       <td>
-        <button class="btn btn-secondary btn-sm" onclick="showReceiptModalById('${inv.id}')">Print Receipt 🖨️</button>
+        <div style="display: flex; gap: 4px;">
+          <button class="btn btn-secondary btn-sm" onclick="showReceiptModalById('${inv.id}')" title="Print Invoice Receipt">Print 🖨️</button>
+          <button class="btn btn-warning btn-sm" onclick="openReturnModalForInvoice('${inv.id}')" title="Return or Exchange Product">🔄 Return</button>
+        </div>
       </td>
     </tr>
   `).join('');

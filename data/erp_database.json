@@ -21,12 +21,12 @@
       "size": "4.5 Meters",
       "cost_price": 2600.0,
       "selling_price": 4800.0,
-      "stock_quantity": 42,
+      "stock_quantity": 43,
       "min_stock_alert": 10,
       "supplier_id": "SUP-001",
       "description": "Wrinkle-resistant premium fabric designed for corporate and executive year-round wear.",
       "created_at": "2026-11-01 10:00:00",
-      "updated_at": "2026-11-17 12:00:00"
+      "updated_at": "2026-11-17 17:43:38"
     },
     {
       "id": "PRD-1002",
@@ -38,12 +38,12 @@
       "size": "7.0 Meters (Full Cut)",
       "cost_price": 11500.0,
       "selling_price": 17500.0,
-      "stock_quantity": 24,
+      "stock_quantity": 22,
       "min_stock_alert": 8,
       "supplier_id": "SUP-002",
       "description": "Authentic 8-pound royal Chinese spun silk boski with signature fall and sheen.",
       "created_at": "2026-11-01 10:15:00",
-      "updated_at": "2026-11-17 12:00:00"
+      "updated_at": "2026-11-17 17:43:38"
     },
     {
       "id": "PRD-1003",
@@ -55,12 +55,12 @@
       "size": "4.5 Meters",
       "cost_price": 4200.0,
       "selling_price": 6900.0,
-      "stock_quantity": 31,
+      "stock_quantity": 30,
       "min_stock_alert": 10,
       "supplier_id": "SUP-002",
       "description": "Crisp executive white finish latha with stiff collar feel and royal luster.",
       "created_at": "2026-11-01 10:30:00",
-      "updated_at": "2026-11-17 12:00:00"
+      "updated_at": "2026-11-17 17:43:25"
     },
     {
       "id": "PRD-1004",
@@ -72,12 +72,12 @@
       "size": "4.5 Meters",
       "cost_price": 5100.0,
       "selling_price": 8400.0,
-      "stock_quantity": 19,
+      "stock_quantity": 20,
       "min_stock_alert": 6,
       "supplier_id": "SUP-003",
       "description": "Traditional warm winter karandi featuring rich texture and natural thermal retention.",
       "created_at": "2026-11-01 10:45:00",
-      "updated_at": "2026-11-17 12:00:00"
+      "updated_at": "2026-11-17 17:43:25"
     },
     {
       "id": "PRD-1005",
@@ -242,6 +242,16 @@
       "total_purchases": 67900.0,
       "total_orders": 4,
       "created_at": "2026-11-06 17:00:00"
+    },
+    {
+      "id": "CUST-007",
+      "name": "Walk-in Customer",
+      "phone": "0300-0000000",
+      "address": "Gujranwala",
+      "city": "Gujranwala",
+      "total_purchases": 22300.0,
+      "total_orders": 1,
+      "created_at": "2026-11-17 17:34:38"
     }
   ],
   "suppliers": [
@@ -317,7 +327,7 @@
       "payment_method": "Cash",
       "amount_paid": 12000.0,
       "change_due": 800.0,
-      "status": "Paid",
+      "status": "Returned (Exchange)",
       "notes": "VIP Loyal Customer discount applied"
     },
     {
@@ -618,7 +628,7 @@
       "payment_method": "Cash",
       "amount_paid": 13000.0,
       "change_due": 0.0,
-      "status": "Paid",
+      "status": "Exchanged (EXC-0005)",
       "notes": "Today's morning register checkout"
     },
     {
@@ -878,6 +888,49 @@
       "change_due": 0.0,
       "status": "Paid",
       "notes": "POS Terminal transaction"
+    },
+    {
+      "id": "INV-1015",
+      "invoice_number": "INV-1015",
+      "customer_id": "CUST-007",
+      "customer_name": "Walk-in Customer",
+      "customer_phone": "0300-0000000",
+      "date": "2026-11-17",
+      "items": [
+        {
+          "product_id": "PRD-1001",
+          "barcode": "8901001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "color": "Midnight Navy",
+          "quantity": 1,
+          "unit_cost": 2600.0,
+          "unit_price": 4800,
+          "total": 4800,
+          "profit": 2200.0
+        },
+        {
+          "product_id": "PRD-1002",
+          "barcode": "8901002",
+          "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+          "color": "Cream Ivory",
+          "quantity": 1,
+          "unit_cost": 11500.0,
+          "unit_price": 17500,
+          "total": 17500,
+          "profit": 6000.0
+        }
+      ],
+      "subtotal": 22300.0,
+      "discount": 0,
+      "tax": 0.0,
+      "grand_total": 22300.0,
+      "total_cost": 14100.0,
+      "total_profit": 8200.0,
+      "payment_method": "Cash",
+      "amount_paid": 22300,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "POS Counter Sale Checkout"
     }
   ],
   "estimates": [
@@ -1053,6 +1106,78 @@
       "return_type": "Cash / Payment Refund",
       "reason": "Fabric cut length requirement changed by personal master tailor",
       "date": "2026-11-16"
+    },
+    {
+      "id": "RET-0003",
+      "invoice_id": "INV-1001",
+      "customer_name": "Malik Tariq Mehmood",
+      "product_id": "PRD-1001",
+      "product_name": "Imperial Super Wash & Wear Suit",
+      "quantity": 1,
+      "refund_amount": 4800.0,
+      "return_type": "Suit Restock / Exchange",
+      "reason": "Customer return or exchange",
+      "date": "2026-11-17"
+    },
+    {
+      "id": "EXC-0004",
+      "invoice_id": "INV-1008",
+      "invoice_number": "INV-1008",
+      "customer_name": "Engr. Kamran Akram (Walk-in)",
+      "customer_phone": "+92 300 7766554",
+      "product_id": "PRD-1004",
+      "product_name": "Handcrafted Kashmiri Karandi Suit",
+      "color": "Slate Charcoal",
+      "quantity": 1,
+      "unit_price": 8400.0,
+      "refund_amount": 8400.0,
+      "return_type": "Return & Exchange",
+      "reason": "Customer exchanged for Pasha Latha",
+      "date": "2026-11-17",
+      "created_at": "2026-11-17 17:43:25",
+      "exchange_item": {
+        "product_id": "PRD-1003",
+        "barcode": "8901003",
+        "name": "Pasha Royal Sovereign Latha 4.5m",
+        "color": "Pearl White",
+        "quantity": 1,
+        "unit_price": 6900.0,
+        "total": 6900.0
+      },
+      "returned_credit": 8400.0,
+      "new_item_total": 6900.0,
+      "net_difference": -1500.0,
+      "payment_method": "Cash"
+    },
+    {
+      "id": "EXC-0005",
+      "invoice_id": "INV-1008",
+      "invoice_number": "INV-1008",
+      "customer_name": "Engr. Kamran Akram (Walk-in)",
+      "customer_phone": "+92 300 7766554",
+      "product_id": "PRD-1001",
+      "product_name": "Imperial Super Wash & Wear Suit",
+      "color": "Midnight Navy",
+      "quantity": 1,
+      "unit_price": 4800.0,
+      "refund_amount": 4800.0,
+      "return_type": "Return & Exchange",
+      "reason": "Customer upgraded from Wash & Wear to Silk Boski",
+      "date": "2026-11-17",
+      "created_at": "2026-11-17 17:43:38",
+      "exchange_item": {
+        "product_id": "PRD-1002",
+        "barcode": "8901002",
+        "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+        "color": "Cream Ivory",
+        "quantity": 1,
+        "unit_price": 17500.0,
+        "total": 17500.0
+      },
+      "returned_credit": 4800.0,
+      "new_item_total": 17500.0,
+      "net_difference": 12700.0,
+      "payment_method": "Cash"
     }
   ],
   "purchase_returns": [],

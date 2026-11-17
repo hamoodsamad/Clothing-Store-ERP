@@ -492,6 +492,9 @@ class ErpHandler(BaseHTTPRequestHandler):
             qty = max(1, int(payload.get("quantity", 1)))
             ret_type = payload.get("return_type", "SUIT_EXCHANGE")
             reason = payload.get("reason", "Customer return or exchange")
+            exchange_pid = payload.get("exchange_product_id")
+            exchange_qty = max(1, int(payload.get("exchange_quantity", 1)))
+            payment_method = payload.get("payment_method", "Cash")
 
             invoice = None
             for inv in db.get("invoices", []):
@@ -513,47 +516,98 @@ class ErpHandler(BaseHTTPRequestHandler):
 
             qty = min(qty, item["quantity"])
             refund_amount = item["unit_price"] * qty
-            is_suit = "SUIT" in ret_type.upper() or "EXCHANGE" in ret_type.upper()
+            is_suit_exchange = "EXCHANGE" in ret_type.upper()
 
-            # Restock suit
+            # 1. Restock returned suit into inventory
             for p in db.get("products", []):
                 if p["id"] == pid:
                     p["stock_quantity"] += qty
                     p["updated_at"] = now
                     break
 
-            if not is_suit and invoice.get("customer_id"):
-                for c in db.get("customers", []):
-                    if c["id"] == invoice["customer_id"]:
-                        c["total_purchases"] = max(0.0, c["total_purchases"] - refund_amount)
+            exchange_item = None
+            exchange_total = 0.0
+            net_difference = -refund_amount
+
+            # 2. If exchange item chosen, deduct its stock and compute difference
+            if is_suit_exchange and exchange_pid:
+                new_prod = None
+                for p in db.get("products", []):
+                    if p["id"] == exchange_pid:
+                        new_prod = p
                         break
 
-            invoice["status"] = f"Returned ({'Exchange' if is_suit else 'Refund'})"
+                if not new_prod:
+                    return self.send_json({"error": "Newly selected exchange suit was not found"}, status=404)
+                if new_prod["stock_quantity"] < exchange_qty:
+                    return self.send_json({"error": f"Insufficient stock for '{new_prod['name']}'. Available: {new_prod['stock_quantity']} pcs"}, status=400)
 
-            ret_id = f"RET-{len(db.get('sales_returns', [])) + 1:04d}"
+                new_prod["stock_quantity"] -= exchange_qty
+                new_prod["updated_at"] = now
+                exchange_total = new_prod["selling_price"] * exchange_qty
+                net_difference = exchange_total - refund_amount
+
+                exchange_item = {
+                    "product_id": new_prod["id"],
+                    "barcode": new_prod["barcode"],
+                    "name": new_prod["name"],
+                    "color": new_prod.get("color", ""),
+                    "quantity": exchange_qty,
+                    "unit_price": new_prod["selling_price"],
+                    "total": exchange_total
+                }
+
+            # Update customer ledger
+            if invoice.get("customer_id"):
+                for c in db.get("customers", []):
+                    if c["id"] == invoice["customer_id"]:
+                        c["total_purchases"] = max(0.0, c["total_purchases"] + net_difference)
+                        break
+
+            ret_num = len(db.get("sales_returns", [])) + 1
+            ret_id = f"EXC-{ret_num:04d}" if (is_suit_exchange and exchange_item) else f"RET-{ret_num:04d}"
+
             sale_ret = {
                 "id": ret_id,
                 "invoice_id": invoice["id"],
+                "invoice_number": invoice["invoice_number"],
                 "customer_name": invoice["customer_name"],
+                "customer_phone": invoice.get("customer_phone", ""),
                 "product_id": pid,
                 "product_name": item["name"],
+                "color": item.get("color", ""),
                 "quantity": qty,
+                "unit_price": item["unit_price"],
                 "refund_amount": refund_amount,
-                "return_type": "Suit Restock / Exchange" if is_suit else "Cash / Payment Refund",
+                "return_type": "Return & Exchange" if (is_suit_exchange and exchange_item) else ("Suit Restock / Exchange" if is_suit_exchange else "Cash / Payment Refund"),
                 "reason": reason,
-                "date": today
+                "date": today,
+                "created_at": now,
+                "exchange_item": exchange_item,
+                "returned_credit": refund_amount,
+                "new_item_total": exchange_total,
+                "net_difference": net_difference,
+                "payment_method": payment_method
             }
 
             db.setdefault("sales_returns", []).append(sale_ret)
+            invoice["status"] = f"Exchanged ({ret_id})" if (is_suit_exchange and exchange_item) else f"Returned ({ret_id})"
             write_db(db)
 
-            msg = (f"Suit exchange processed. {qty} pieces restocked into inventory." if is_suit else 
-                   f"Cash refund of Rs. {refund_amount:,.0f} processed. {qty} pieces restocked into inventory.")
+            if is_suit_exchange and exchange_item:
+                if net_difference > 0:
+                    msg = f"Exchange processed! Customer paid difference of Rs. {net_difference:,.0f} via {payment_method}."
+                elif net_difference < 0:
+                    msg = f"Exchange processed! Store refunded difference of Rs. {abs(net_difference):,.0f} to customer."
+                else:
+                    msg = "Even exchange processed! New suit provided at identical value (Rs. 0 difference)."
+            else:
+                msg = f"Return processed! {qty} piece(s) restocked into inventory. Cash refund: Rs. {refund_amount:,.0f}."
 
             self.send_json({
                 "success": True,
                 "sale_return": sale_ret,
-                "restocked_quantity": qty,
+                "exchange_slip": sale_ret,
                 "message": msg
             })
 
