@@ -19,9 +19,11 @@ def get_db_file():
     if os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"):
         tmp_db = "/tmp/erp_database.json"
         if not os.path.exists(tmp_db):
-            # Seed from repo data if available
-            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            seed_file = os.path.join(base_dir, "data", "erp_database.json")
+            # Check inside api folder first (packaged by Vercel alongside this file)
+            seed_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "erp_database.json")
+            if not os.path.exists(seed_file):
+                base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                seed_file = os.path.join(base_dir, "data", "erp_database.json")
             if os.path.exists(seed_file):
                 try:
                     shutil.copyfile(seed_file, tmp_db)
@@ -39,6 +41,14 @@ def ensure_db():
     db_file = get_db_file()
     if not os.path.exists(db_file):
         os.makedirs(os.path.dirname(db_file), exist_ok=True)
+        # Try seeding from api/erp_database.json
+        seed_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "erp_database.json")
+        if os.path.exists(seed_file):
+            try:
+                shutil.copyfile(seed_file, db_file)
+                return
+            except Exception:
+                pass
         default_db = {
             "store_settings": {
                 "store_name": "Clothing Store",
