@@ -1043,14 +1043,28 @@
 
       <!-- Returned Item Summary Box -->
       <div style="padding: 12px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 14px; box-sizing: border-box; width: 100%;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="font-size: 14px; font-weight: 700; color: var(--text-primary);" id="retModalSuitName">Imperial Super Wash & Wear Suit</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px;">Purchased Item to Return</span>
           <span class="badge badge-warning" style="font-size: 11px;">Returned Item</span>
         </div>
-        <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
-          Customer: <b id="retModalCustName" style="color: var(--text-primary);">Malik Tariq</b> | 
-          Invoice: <b id="retModalInvNum" style="color: var(--brand-gold);">INV-1001</b> | 
-          Unit Rate: <b id="retModalUnitPrice" style="color: var(--brand-primary);">Rs. 4,800</b>
+
+        <!-- Multi-item dropdown (auto-shows if invoice has >1 items) -->
+        <div id="retModalMultiItemContainer" style="display: none; margin-bottom: 8px;">
+          <label style="font-size: 12px; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 4px;">Choose Suit from Invoice to Return:</label>
+          <select id="retModalItemSelect" class="form-control" onchange="onReturnItemChange(this.value)" style="width: 100%; box-sizing: border-box; font-weight: 600;"></select>
+        </div>
+
+        <!-- Single item display -->
+        <div id="retModalSingleItemContainer">
+          <div style="font-size: 14px; font-weight: 700; color: var(--text-primary);" id="retModalSuitName">Imperial Super Wash & Wear Suit</div>
+        </div>
+
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border-color); display: flex; flex-wrap: wrap; gap: 8px;">
+          <span>Customer: <b id="retModalCustName" style="color: var(--text-primary);">Malik Tariq</b></span>
+          <span>•</span>
+          <span>Invoice: <b id="retModalInvNum" style="color: var(--brand-gold);">INV-1001</b></span>
+          <span>•</span>
+          <span>Unit Rate: <b id="retModalUnitPrice" style="color: var(--brand-primary);">Rs. 4,800</b></span>
         </div>
       </div>
 

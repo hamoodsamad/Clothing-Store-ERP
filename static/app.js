@@ -1370,11 +1370,94 @@ function calculateExchangeDiff() {
   }
 }
 
+let currentInvoiceForReturn = null;
+
+function openReturnModalForInvoice(invId) {
+  const inv = allInvoicesData.find(i => i.id === invId || i.invoice_number === invId);
+  if (!inv || !inv.items || inv.items.length === 0) return;
+
+  currentInvoiceForReturn = inv;
+  const items = inv.items;
+
+  const multiContainer = document.getElementById('retModalMultiItemContainer');
+  const singleContainer = document.getElementById('retModalSingleItemContainer');
+  const itemSelect = document.getElementById('retModalItemSelect');
+
+  if (items.length > 1) {
+    if (multiContainer) multiContainer.style.display = 'block';
+    if (singleContainer) singleContainer.style.display = 'none';
+    if (itemSelect) {
+      itemSelect.innerHTML = items.map((it, idx) => `
+        <option value="${idx}">
+          ${it.name} (${it.color}) — Qty: ${it.quantity} Pcs @ Rs. ${(it.unit_price || 0).toLocaleString()}
+        </option>
+      `).join('');
+    }
+  } else {
+    if (multiContainer) multiContainer.style.display = 'none';
+    if (singleContainer) singleContainer.style.display = 'block';
+  }
+
+  // Select first item by default
+  selectReturnItemByIndex(0);
+
+  // Directly open return menu modal - zero alerts or browser popups!
+  document.getElementById('returnModal').classList.add('active');
+}
+
+function onReturnItemChange(indexStr) {
+  const idx = parseInt(indexStr, 10);
+  selectReturnItemByIndex(idx);
+}
+
+function selectReturnItemByIndex(index) {
+  if (!currentInvoiceForReturn || !currentInvoiceForReturn.items || !currentInvoiceForReturn.items[index]) return;
+  const chosenItem = currentInvoiceForReturn.items[index];
+
+  selectedReturnItem = {
+    invoice_id: currentInvoiceForReturn.id,
+    invoice_number: currentInvoiceForReturn.invoice_number,
+    customer_name: currentInvoiceForReturn.customer_name,
+    customer_phone: currentInvoiceForReturn.customer_phone || '-',
+    product_id: chosenItem.product_id,
+    product_name: chosenItem.name,
+    color: chosenItem.color,
+    unit_price: chosenItem.unit_price,
+    max_quantity: chosenItem.quantity,
+  };
+
+  document.getElementById('retModalSuitName').textContent = `${chosenItem.name} (${chosenItem.color})`;
+  document.getElementById('retModalCustName').textContent = currentInvoiceForReturn.customer_name;
+  document.getElementById('retModalInvNum').textContent = currentInvoiceForReturn.invoice_number;
+  document.getElementById('retModalUnitPrice').textContent = `Rs. ${(chosenItem.unit_price || 0).toLocaleString()}`;
+
+  const qtyInput = document.getElementById('retModalQty');
+  qtyInput.value = 1;
+  qtyInput.max = chosenItem.quantity;
+
+  populateExchangeProductDropdown(chosenItem.product_id);
+  selectReturnType('SUIT_EXCHANGE');
+  calculateExchangeDiff();
+}
+
 function openReturnModalFromHistory(invoiceId, invoiceNumber, custName, productId, productName, unitPrice, maxQty) {
+  currentInvoiceForReturn = allInvoicesData.find(i => i.id === invoiceId || i.invoice_number === invoiceNumber) || {
+    id: invoiceId,
+    invoice_number: invoiceNumber,
+    customer_name: custName,
+    items: [{ product_id: productId, name: productName, color: '', unit_price: unitPrice, quantity: maxQty }]
+  };
+
+  const multiContainer = document.getElementById('retModalMultiItemContainer');
+  const singleContainer = document.getElementById('retModalSingleItemContainer');
+  if (multiContainer) multiContainer.style.display = 'none';
+  if (singleContainer) singleContainer.style.display = 'block';
+
   selectedReturnItem = {
     invoice_id: invoiceId,
     invoice_number: invoiceNumber,
     customer_name: custName,
+    customer_phone: (currentInvoiceForReturn && currentInvoiceForReturn.customer_phone) || '-',
     product_id: productId,
     product_name: productName,
     unit_price: unitPrice,
@@ -1394,34 +1477,8 @@ function openReturnModalFromHistory(invoiceId, invoiceNumber, custName, productI
   selectReturnType('SUIT_EXCHANGE');
   calculateExchangeDiff();
 
+  // Directly open return menu modal - zero alerts or browser popups!
   document.getElementById('returnModal').classList.add('active');
-}
-
-function openReturnModalForInvoice(invId) {
-  const inv = allInvoicesData.find(i => i.id === invId || i.invoice_number === invId);
-  if (!inv) return alert('Invoice not found');
-  if (!inv.items || inv.items.length === 0) return alert('No items found in this invoice');
-
-  let chosenItem = inv.items[0];
-  if (inv.items.length > 1) {
-    const list = inv.items.map((it, idx) => `${idx + 1}. ${it.name} (${it.color}) - Qty: ${it.quantity} Pcs @ Rs. ${it.unit_price}`).join('\n');
-    const pick = prompt(`This invoice has multiple items. Choose which suit customer is returning (1 to ${inv.items.length}):\n${list}`, '1');
-    if (!pick) return;
-    const index = parseInt(pick, 10) - 1;
-    if (index >= 0 && index < inv.items.length) {
-      chosenItem = inv.items[index];
-    }
-  }
-
-  openReturnModalFromHistory(
-    inv.id,
-    inv.invoice_number,
-    inv.customer_name,
-    chosenItem.product_id,
-    chosenItem.name,
-    chosenItem.unit_price,
-    chosenItem.quantity
-  );
 }
 
 function selectReturnType(type) {
