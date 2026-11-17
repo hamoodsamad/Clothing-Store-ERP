@@ -1,0 +1,2 @@
+# Clothing Store ERP System
+# Python Standard Library only (zero heavy external dependencies)

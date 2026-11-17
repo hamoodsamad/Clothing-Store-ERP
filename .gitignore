@@ -1,0 +1,14 @@
+# Build & Temp Artifacts
+/target/
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Vercel & IDE
+.vercel/
+.idea/
+.vscode/
+
+# System / Scratch files
+.system_generated/

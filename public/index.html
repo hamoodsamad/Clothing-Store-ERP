@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Store | Enterprise ERP & POS</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js for analytics graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-theme="light">
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo-container">
+          <img src="images/logo.svg" alt="Clothing Store Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-info">
+          <h1>Clothing Store</h1>
+          <h2>Enterprise ERP</h2>
+          <p>Management System</p>
+        </div>
+      </div>
+
+      <div class="nav-section-title">Core Operations</div>
+      <ul class="nav-links">
+        <li class="nav-item active" data-tab="dashboard">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          <span>Dashboard</span>
+        </li>
+        <li class="nav-item" data-tab="pos">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="21" r="1.5"/><circle cx="20" cy="21" r="1.5"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span>POS & Billing</span>
+        </li>
+        <li class="nav-item" data-tab="inventory">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <span>Stock & Scanner</span>
+        </li>
+        <li class="nav-item" data-tab="invoices">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>Invoices & Bills</span>
+        </li>
+        <li class="nav-item" data-tab="customers">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Customers & History</span>
+        </li>
+        <li class="nav-item" data-tab="returns">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+          <span>Returns & Refunds</span>
+        </li>
+      </ul>
+
+      <div class="nav-section-title">Business Management</div>
+      <ul class="nav-links">
+        <li class="nav-item" data-tab="estimates">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>
+          <span>Estimates & Quotes</span>
+        </li>
+        <li class="nav-item" data-tab="purchases">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-3"/></svg>
+          <span>Suppliers & Purchases</span>
+        </li>
+        <li class="nav-item" data-tab="expenses">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>Shop Expenses</span>
+        </li>
+        <li class="nav-item" data-tab="delivery">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span>Delivery Challans</span>
+        </li>
+        <li class="nav-item" data-tab="reports">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>P&L Financial Reports</span>
+        </li>
+        <li class="nav-item" data-tab="settings">
+          <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Store Settings</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div style="font-size: 11.5px; color: #94a3b8;">
+          <div style="font-weight: 600; color: #f8fafc;">Clothing Store (Admin)</div>
+          <div>Counter #1 Active</div>
+        </div>
+        <div class="status-badge status-online">🟢 System Online</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Viewport -->
+    <main class="main-content">
+      
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <div>
+            <div class="page-title" id="pageTitle">Dashboard & Financial Analytics</div>
+            <div class="page-subtitle" id="pageSubtitle">Clothing Store - Revenue, Cash Flow, Profit & Inventory Analysis</div>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Quick Restock Scanner Trigger -->
+          <button class="scanner-quick-btn" onclick="openRestockModal()">
+            <span>📷</span>
+            <span>Restock Barcode Scanner</span>
+          </button>
+
+          <!-- Dark / Light Mode Toggle Button -->
+          <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">
+            <span id="themeIcon">🌙</span>
+            <span id="themeLabel">Dark Mode</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Scrollable Tab Views Area -->
+      <div class="view-area">
+
+        <!-- 1. DASHBOARD TAB -->
+        <section id="view-dashboard" class="tab-view active">
+          
+          <!-- Monthly KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card green">
+              <div class="kpi-info">
+                <h3>THIS MONTH SALES</h3>
+                <div class="kpi-value" id="kpiSales">Rs. 0</div>
+                <div class="kpi-urdu">Total monthly revenue</div>
+              </div>
+              <div class="kpi-icon">💰</div>
+            </div>
+
+            <div class="kpi-card blue">
+              <div class="kpi-info">
+                <h3>THIS MONTH PURCHASES</h3>
+                <div class="kpi-value" id="kpiPurchases">Rs. 0</div>
+                <div class="kpi-urdu">Inventory restocked cost</div>
+              </div>
+              <div class="kpi-icon">📦</div>
+            </div>
+
+            <div class="kpi-card gold">
+              <div class="kpi-info">
+                <h3>NET PROFIT THIS MONTH</h3>
+                <div class="kpi-value" id="kpiProfit">Rs. 0</div>
+                <div class="kpi-urdu">Sales - Cost - Expenses</div>
+              </div>
+              <div class="kpi-icon">📈</div>
+            </div>
+
+            <div class="kpi-card purple">
+              <div class="kpi-info">
+                <h3>PAYMENTS RECEIVED</h3>
+                <div class="kpi-value" id="kpiReceived">Rs. 0</div>
+                <div class="kpi-urdu">Cash & Card collected</div>
+              </div>
+              <div class="kpi-icon">📥</div>
+            </div>
+
+            <div class="kpi-card red">
+              <div class="kpi-info">
+                <h3>PAYMENTS PAID</h3>
+                <div class="kpi-value" id="kpiPaid">Rs. 0</div>
+                <div class="kpi-urdu">Suppliers & shop expenses</div>
+              </div>
+              <div class="kpi-icon">📤</div>
+            </div>
+          </div>
+
+          <!-- Stock Valuation Overview Bar -->
+          <div class="panel-card" style="margin-bottom: 24px; background: linear-gradient(to right, rgba(4,120,87,0.06), rgba(217,119,6,0.06));">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div>
+                <h4 style="font-size: 15px; font-weight: 700; color: var(--brand-primary);">🏬 Total Store Inventory Valuation & Stock Health</h4>
+                <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;">Comprehensive valuation of all suits and fabrics currently in stock</p>
+              </div>
+              <div style="display: flex; gap: 20px;">
+                <div>
+                  <div style="font-size: 11.5px; color: var(--text-muted);">Total Suits in Stock</div>
+                  <div style="font-size: 18px; font-weight: 700;" id="kpiStockUnits">0 Pieces</div>
+                </div>
+                <div>
+                  <div style="font-size: 11.5px; color: var(--text-muted);">Stock Cost Value</div>
+                  <div style="font-size: 18px; font-weight: 700;" id="kpiStockCost">Rs. 0</div>
+                </div>
+                <div>
+                  <div style="font-size: 11.5px; color: var(--text-muted);">Retail Selling Value</div>
+                  <div style="font-size: 18px; font-weight: 700; color: var(--brand-primary);" id="kpiStockRetail">Rs. 0</div>
+                </div>
+                <div>
+                  <div style="font-size: 11.5px; color: var(--text-muted);">Low Stock Alerts</div>
+                  <div style="font-size: 18px; font-weight: 700; color: var(--brand-red);" id="kpiLowStock">0 Items</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Financial Analytics Charts (Starts at Zero) -->
+          <div class="dashboard-columns" style="margin-bottom: 24px;">
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <span>📈</span>
+                  <span>Monthly Sales & Net Profit Growth (Real-time Trend)</span>
+                </div>
+                <span class="badge badge-info" id="chartStatusBadge">Starts at 0</span>
+              </div>
+              <div style="height: 250px; position: relative;">
+                <canvas id="salesProfitChart"></canvas>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <span>📊</span>
+                  <span>Payment Inflow vs Outflow Cash Analysis</span>
+                </div>
+                <span class="badge badge-success">Live Cash Tracking</span>
+              </div>
+              <div style="height: 250px; position: relative;">
+                <canvas id="cashFlowChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Best-Selling vs Slowest-Selling Suits Analysis -->
+          <div class="dashboard-columns">
+            
+            <!-- Best Selling Suits -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <span>🔥</span>
+                  <span>Top Best-Selling Suits (Top Movers)</span>
+                </div>
+                <span class="badge badge-success">High Revenue</span>
+              </div>
+              <div class="table-responsive">
+                <table class="erp-table">
+                  <thead>
+                    <tr>
+                      <th>Suit Name / Barcode</th>
+                      <th>Category</th>
+                      <th>Sold (Pcs)</th>
+                      <th>Total Revenue</th>
+                      <th>Gross Profit</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bestSellingTableBody">
+                    <tr><td colspan="5" style="text-align:center;">Loading analytics...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Slowest Selling Suits -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <span>⚠️</span>
+                  <span>Slowest-Selling Suits (Slow Moving / Dead Stock)</span>
+                </div>
+                <span class="badge badge-warning">Requires Clearance</span>
+              </div>
+              <div class="table-responsive">
+                <table class="erp-table">
+                  <thead>
+                    <tr>
+                      <th>Suit Name / Barcode</th>
+                      <th>Current Stock</th>
+                      <th>Units Sold</th>
+                      <th>Category</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="slowestSellingTableBody">
+                    <tr><td colspan="5" style="text-align:center;">Loading analytics...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Recent Invoices Table -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>🧾</span>
+                <span>Recent Customer Invoices & Counter Bills</span>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="switchTab('invoices')">View All Invoices →</button>
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Date</th>
+                    <th>Customer Name</th>
+                    <th>Phone</th>
+                    <th>Items Purchased</th>
+                    <th>Grand Total</th>
+                    <th>Profit Earned</th>
+                    <th>Payment</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recentInvoicesTableBody">
+                  <tr><td colspan="9" style="text-align:center;">Loading recent bills...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 2. POS & BILLING TAB -->
+        <section id="view-pos" class="tab-view">
+          <div class="pos-layout">
+            
+            <!-- Left Side: Scanner & Product Catalog -->
+            <div class="pos-main">
+              
+              <!-- POS Scanner Input Bar -->
+              <div class="pos-scanner-box">
+                <div style="font-size: 28px;">📷</div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <label style="font-size: 13px; font-weight: 700; color: var(--brand-primary);">
+                      ⚡ POS Barcode Scanner (Sale Checkout):
+                    </label>
+                    <span style="font-size: 11px; color: var(--text-muted);">
+                      (Scanning or typing barcode + Enter automatically adds suit to active bill)
+                    </span>
+                  </div>
+                  <div style="display: flex; gap: 10px;">
+                    <input type="text" id="posBarcodeInput" class="pos-scanner-input" 
+                      placeholder="Scan or type barcode (e.g. 8901001 for Blackish Suit)..." 
+                      autocomplete="off">
+                    <button class="btn btn-primary" onclick="handlePosBarcodeScan()">Add Suit (Enter)</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Customer Details Bar -->
+              <div class="panel-card" style="padding: 14px 18px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                  <span style="font-weight: 700; font-size: 13.5px;">👤 Customer Information:</span>
+                  <button class="btn btn-secondary btn-sm" onclick="setQuickWalkinCustomer()">Quick Counter (Walk-in)</button>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+                  <div>
+                    <label class="form-label">Customer Name:</label>
+                    <input type="text" id="posCustName" class="form-control" placeholder="Enter customer name...">
+                  </div>
+                  <div>
+                    <label class="form-label">Mobile / WhatsApp:</label>
+                    <input type="text" id="posCustPhone" class="form-control" placeholder="e.g. 03001234567">
+                  </div>
+                  <div>
+                    <label class="form-label">City / Address:</label>
+                    <input type="text" id="posCustCity" class="form-control" placeholder="Gujranwala / Lahore...">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Products Selection Grid -->
+              <div class="panel-card" style="flex: 1;">
+                <div class="panel-header" style="margin-bottom: 12px; padding-bottom: 8px;">
+                  <div class="panel-title">
+                    <span>🛍️</span>
+                    <span>Quick Catalog Selection</span>
+                  </div>
+                  <div style="display: flex; gap: 8px;">
+                    <input type="text" id="posFilterSearch" class="form-control" placeholder="Search suit name or color..." style="width: 220px;" oninput="filterPosCatalog()">
+                    <select id="posFilterCat" class="form-control" style="width: 150px;" onchange="filterPosCatalog()">
+                      <option value="All">All Categories</option>
+                      <option value="Unstitched Fabric">Unstitched Fabric</option>
+                      <option value="Ready-to-Wear">Ready-to-Wear</option>
+                      <option value="Winter Collection">Winter Collection</option>
+                      <option value="Accessories">Accessories</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div id="posCatalogGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; max-height: 380px; overflow-y: auto;">
+                  <!-- Dynamic Catalog Cards -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Side: POS Cart & Checkout Summary -->
+            <div class="pos-cart-panel">
+              <div class="pos-cart-header">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h3 style="font-size: 15px; font-weight: 700;">Active Bill Cart</h3>
+                  <button class="btn btn-secondary btn-sm" onclick="clearPosCart()">Clear Cart 🗑️</button>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+                  Items Count: <span id="cartCountBadge" style="font-weight: 700; color: var(--brand-primary);">0</span>
+                </div>
+              </div>
+
+              <!-- Cart Items List -->
+              <div class="pos-cart-items" id="posCartItemsList">
+                <div style="text-align: center; color: var(--text-muted); margin-top: 50px;">
+                  <div style="font-size: 32px; margin-bottom: 8px;">🛒</div>
+                  <div>Bill cart is empty</div>
+                  <div style="font-size: 11.5px; margin-top: 4px;">Scan barcode or click a suit to add</div>
+                </div>
+              </div>
+
+              <!-- Financial Summary & Profit Box -->
+              <div class="pos-cart-summary">
+                <div class="summary-line">
+                  <span>Subtotal:</span>
+                  <span id="posSubtotal" style="font-weight: 600;">Rs. 0</span>
+                </div>
+                <div class="summary-line" style="align-items: center;">
+                  <span>Discount (PKR):</span>
+                  <input type="number" id="posDiscount" class="form-control" style="width: 90px; padding: 4px 8px; text-align: right;" value="0" min="0" oninput="calculatePosTotals()">
+                </div>
+                <div class="summary-line grand-total">
+                  <span>Net Payable Total:</span>
+                  <span id="posGrandTotal" style="color: var(--brand-primary);">Rs. 0</span>
+                </div>
+
+                <!-- Live Profit Badge on this Bill -->
+                <div class="summary-profit-badge">
+                  <span>Gross Profit on this Bill:</span>
+                  <span id="posTotalProfit" style="font-size: 14px;">Rs. 0</span>
+                </div>
+
+                <!-- Payment Options & Tendered Amount -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;">
+                  <div>
+                    <label style="font-size: 11px; font-weight: 600;">Payment Method:</label>
+                    <select id="posPaymentMethod" class="form-control" style="padding: 6px;">
+                      <option value="Cash">Cash</option>
+                      <option value="Card">Bank Card / POS</option>
+                      <option value="Bank Transfer">Bank Transfer / Online</option>
+                      <option value="Credit">Store Credit / Khata</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="font-size: 11px; font-weight: 600;">Cash Tendered:</label>
+                    <input type="number" id="posAmountPaid" class="form-control" style="padding: 6px;" placeholder="Cash..." oninput="calculatePosChange()">
+                  </div>
+                </div>
+
+                <div class="summary-line" style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-top: 4px;">
+                  <span>Change Return Due:</span>
+                  <span id="posChangeDue" style="color: var(--brand-gold);">Rs. 0</span>
+                </div>
+
+                <!-- Final Action Button -->
+                <button class="btn btn-primary" style="padding: 12px; font-size: 15px; margin-top: 6px;" onclick="submitPosCheckout()">
+                  <span>💳</span>
+                  <span>Complete Sale & Deduct Stock (Print Bill)</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 3. INVENTORY & RESTOCK SCANNER TAB -->
+        <section id="view-inventory" class="tab-view">
+          
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">📦 Inventory & Stock Management</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Manage all suit fabrics, available stock counts, cost prices, retail rates and profit margins</p>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <button class="btn btn-gold" onclick="openRestockModal()">
+                  <span>📷</span>
+                  <span>Restock Barcode Scanner (+Stock)</span>
+                </button>
+
+                <button class="btn btn-primary" onclick="openAddProductModal()">
+                  <span>➕</span>
+                  <span>Add New Suit / Product</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Filters Bar -->
+            <div style="display: flex; gap: 14px; margin-top: 16px; align-items: center; flex-wrap: wrap;">
+              <input type="text" id="invSearchInput" class="form-control" placeholder="Search by barcode, name, fabric or color..." style="max-width: 320px;" oninput="loadInventory()">
+              <select id="invCatSelect" class="form-control" style="max-width: 200px;" onchange="loadInventory()">
+                <option value="All">All Categories</option>
+                <option value="Unstitched Fabric">Unstitched Fabric</option>
+                <option value="Ready-to-Wear">Ready-to-Wear</option>
+                <option value="Winter Collection">Winter Collection</option>
+                <option value="Accessories">Accessories</option>
+              </select>
+              <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">
+                <input type="checkbox" id="invLowStockOnly" onchange="loadInventory()">
+                <span>Show Low & Out of Stock Only</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Product Inventory Table -->
+          <div class="panel-card">
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Barcode / SKU</th>
+                    <th>Suit Name</th>
+                    <th>Category & Fabric</th>
+                    <th>Color</th>
+                    <th>Available Stock</th>
+                    <th>Cost Price</th>
+                    <th>Selling Price</th>
+                    <th>Profit Margin</th>
+                    <th>Stock Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                  <tr><td colspan="10" style="text-align:center;">Loading inventory...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 4. INVOICES & BILLS TAB -->
+        <section id="view-invoices" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">🧾 Sales Invoices & Bill History</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Historical invoices, reprint receipts, customer order tracking and return statuses</p>
+              </div>
+              <input type="text" id="invoiceSearchInput" class="form-control" placeholder="Search invoice #, customer name or phone..." style="width: 300px;" oninput="filterInvoices()">
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Date</th>
+                    <th>Customer Name</th>
+                    <th>Phone</th>
+                    <th>Items Purchased</th>
+                    <th>Grand Total</th>
+                    <th>Profit</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="allInvoicesTableBody">
+                  <tr><td colspan="10" style="text-align:center;">Loading invoices...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. CUSTOMERS & PURCHASE HISTORY TAB -->
+        <section id="view-customers" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">👥 Customer Database & Purchase History</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">
+                  Search any customer by name or phone to view every suit they bought, and process returns or cash refunds on the spot
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <input type="text" id="customerSearchInput" class="form-control" placeholder="Search customer name or phone (e.g. Arslan)..." style="width: 280px;" oninput="searchCustomers()">
+                <button class="btn btn-primary" onclick="openAddCustomerModal()">➕ Add New Customer</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Detail & Items Purchased View -->
+          <div id="customerDetailSection" style="display: none; margin-bottom: 24px;">
+            <div class="panel-card" style="border: 2px solid var(--brand-primary); background: linear-gradient(to right, rgba(4,120,87,0.04), rgba(217,119,6,0.04));">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+                <div>
+                  <h3 id="custDetailName" style="font-size: 18px; font-weight: 700; color: var(--brand-primary);">Muhammad Arslan</h3>
+                  <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                    📞 Phone: <span id="custDetailPhone">03001234567</span> | 📍 City: <span id="custDetailCity">Gujranwala</span>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 12px; color: var(--text-muted);">Total Spend Amount</div>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--brand-gold);" id="custDetailTotalPurchases">Rs. 8,400</div>
+                  <div style="font-size: 11.5px; color: var(--text-muted);" id="custDetailOrderCount">2 Orders / Visits</div>
+                </div>
+              </div>
+
+              <!-- Customer Specific Suits Bought Table -->
+              <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">
+                👗 Itemized Purchase History (Suits Bought by this Customer):
+              </h4>
+              <div class="table-responsive">
+                <table class="erp-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Invoice #</th>
+                      <th>Suit Name</th>
+                      <th>Barcode</th>
+                      <th>Color</th>
+                      <th>Qty</th>
+                      <th>Unit Price</th>
+                      <th>Total</th>
+                      <th>Return Option</th>
+                    </tr>
+                  </thead>
+                  <tbody id="custPurchaseHistoryTableBody">
+                    <!-- Dynamic Rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- All Customers Roster -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>📋</span>
+                <span>Registered Customers Directory</span>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>City / Address</th>
+                    <th>Total Purchases</th>
+                    <th>Orders Count</th>
+                    <th>Registration Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="allCustomersTableBody">
+                  <tr><td colspan="8" style="text-align:center;">Loading customer directory...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 6. RETURNS & REFUNDS TAB -->
+        <section id="view-returns" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">🔄 Sales Returns, Exchanges & Cash Refunds</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">
+                  Process returns with two dedicated options: 1) Suit Restock / Exchange, or 2) Direct Cash / Payment Refund
+                </p>
+              </div>
+              <button class="btn btn-primary" onclick="switchTab('customers')">
+                <span>🔍</span>
+                <span>Lookup Customer to Return Suit</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>📜</span>
+                <span>Sales Return & Refund Audit Log</span>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Return ID</th>
+                    <th>Date</th>
+                    <th>Invoice ID</th>
+                    <th>Customer Name</th>
+                    <th>Suit Name</th>
+                    <th>Quantity</th>
+                    <th>Amount (PKR)</th>
+                    <th>Type (Suit Restock vs Cash Refund)</th>
+                    <th>Return Reason</th>
+                  </tr>
+                </thead>
+                <tbody id="salesReturnsTableBody">
+                  <tr><td colspan="9" style="text-align:center;">No returns recorded yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. ESTIMATES TAB -->
+        <section id="view-estimates" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">📋 Quotations & Estimates</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Generate formal quotations and estimated bills for wedding events or bulk purchases</p>
+              </div>
+              <button class="btn btn-primary" onclick="openAddEstimateModal()">➕ Create New Estimate</button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Estimate #</th>
+                    <th>Date</th>
+                    <th>Customer Name</th>
+                    <th>Phone</th>
+                    <th>Items Count</th>
+                    <th>Estimated Total</th>
+                    <th>Valid Until</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="estimatesTableBody">
+                  <tr><td colspan="9" style="text-align:center;">Loading estimates...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. SUPPLIERS & PURCHASES TAB -->
+        <section id="view-purchases" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">🏭 Mills, Textile Suppliers & Purchase Orders</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Manage bulk fabric purchases, supplier invoices, cost per piece and payable balances</p>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button class="btn btn-secondary" onclick="openAddSupplierModal()">➕ Add Supplier</button>
+                <button class="btn btn-primary" onclick="openAddPurchaseModal()">📦 Record Purchase Order</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suppliers Cards Row -->
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">🏢 Registered Suppliers Directory:</h4>
+          <div id="suppliersCardsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+            <!-- Dynamic Supplier Cards -->
+          </div>
+
+          <!-- Purchase Orders Table -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>📦</span>
+                <span>Purchase Orders (Stock Inflow History)</span>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>PO Number</th>
+                    <th>Date</th>
+                    <th>Supplier Name</th>
+                    <th>Suits Purchased</th>
+                    <th>Total Bill</th>
+                    <th>Amount Paid</th>
+                    <th>Due Balance</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="purchasesTableBody">
+                  <tr><td colspan="8" style="text-align:center;">Loading purchase orders...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. EXPENSES TAB -->
+        <section id="view-expenses" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">💸 Store Business Expenses</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Track shop rent, electricity bills, staff salaries, packaging bags, and maintenance</p>
+              </div>
+              <button class="btn btn-primary" onclick="openAddExpenseModal()">➕ Add New Expense</button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Expense ID</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Amount (PKR)</th>
+                    <th>Paid By</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody id="expensesTableBody">
+                  <tr><td colspan="6" style="text-align:center;">Loading expenses...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. DELIVERY NOTES TAB -->
+        <section id="view-delivery" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">🚚 Delivery Challans & Courier Tracking</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Dispatch challans and tracking numbers for TCS, Leopards, and rider parcels</p>
+              </div>
+              <button class="btn btn-primary" onclick="openAddDeliveryModal()">➕ Create Delivery Challan</button>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Challan #</th>
+                    <th>Date</th>
+                    <th>Invoice ID</th>
+                    <th>Customer Name</th>
+                    <th>Phone</th>
+                    <th>Destination Address</th>
+                    <th>Courier</th>
+                    <th>Tracking #</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="deliveryNotesTableBody">
+                  <tr><td colspan="9" style="text-align:center;">Loading delivery notes...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11. REPORTS TAB -->
+        <section id="view-reports" class="tab-view">
+          <div class="panel-card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 700;">📈 Profit & Loss Statement and Financial Summary</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">Summary of total sales revenue, cost of goods sold, operating expenses, and net profit</p>
+              </div>
+              <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Financial Statement</button>
+            </div>
+          </div>
+
+          <div class="dashboard-columns">
+            <div class="panel-card">
+              <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 16px;">Monthly Profit & Loss (P&L)</h4>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="summary-line" style="font-size: 14.5px;">
+                  <span>Gross Sales Revenue (+):</span>
+                  <span id="repSales" style="font-weight: 700; color: var(--brand-primary);">Rs. 0</span>
+                </div>
+                <div class="summary-line" style="font-size: 14.5px;">
+                  <span>Cost of Goods Purchased (-):</span>
+                  <span id="repCost" style="font-weight: 600; color: var(--brand-red);">Rs. 0</span>
+                </div>
+                <div class="summary-line" style="font-size: 14.5px; border-top: 1px dashed var(--border-color); padding-top: 8px;">
+                  <span>Gross Trading Margin:</span>
+                  <span id="repGrossProfit" style="font-weight: 700;">Rs. 0</span>
+                </div>
+                <div class="summary-line" style="font-size: 14.5px;">
+                  <span>Total Store Operating Expenses (-):</span>
+                  <span id="repExpenses" style="font-weight: 600; color: var(--brand-red);">Rs. 0</span>
+                </div>
+                <div class="summary-line grand-total" style="font-size: 18px; color: var(--brand-gold);">
+                  <span>Net Clean Profit (Net Margin):</span>
+                  <span id="repNetProfit">Rs. 0</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 16px;">Cash Flow Analysis (Inflow vs Outflow)</h4>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="summary-line" style="font-size: 14.5px;">
+                  <span>Cash & Card Collected from Customers:</span>
+                  <span id="repReceived" style="font-weight: 700; color: var(--brand-primary);">Rs. 0</span>
+                </div>
+                <div class="summary-line" style="font-size: 14.5px;">
+                  <span>Payments Paid to Textile Suppliers:</span>
+                  <span id="repPaidSuppliers" style="font-weight: 600; color: var(--text-secondary);">Rs. 0</span>
+                </div>
+                <div class="summary-line" style="font-size: 14.5px;">
+                  <span>Cash Disbursed for Expenses:</span>
+                  <span id="repPaidExpenses" style="font-weight: 600; color: var(--text-secondary);">Rs. 0</span>
+                </div>
+                <div class="summary-line grand-total" style="font-size: 18px;">
+                  <span>Net Cash Available (Cash in Hand):</span>
+                  <span id="repNetCash" style="color: var(--brand-primary);">Rs. 0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12. STORE SETTINGS TAB -->
+        <section id="view-settings" class="tab-view">
+          <div class="panel-card" style="max-width: 750px; margin: 0 auto;">
+            <div class="panel-header">
+              <div class="panel-title">
+                <span>⚙️</span>
+                <span>Store Profile & Receipt Customization</span>
+              </div>
+            </div>
+
+            <form id="settingsForm" onsubmit="saveStoreSettings(event)">
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label class="form-label">Store Brand Name:</label>
+                  <input type="text" id="setStoreName" class="form-control" required>
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Slogan / Tagline:</label>
+                  <input type="text" id="setSlogan" class="form-control">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Physical Store Address:</label>
+                  <input type="text" id="setAddress" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Official Phone / Helpline:</label>
+                  <input type="text" id="setPhone" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Official Email Address:</label>
+                  <input type="email" id="setEmail" class="form-control">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Receipt Footer Note / Return Policy:</label>
+                  <textarea id="setInvoiceFooter" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+
+              <div style="margin-top: 16px; text-align: right;">
+                <button type="submit" class="btn btn-primary">💾 Save Store Settings</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ======================== ALL MODALS ======================== -->
+
+  <!-- Modal: Restock Scanner Modal -->
+  <div id="restockModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--brand-primary);">
+          📷 Restock Barcode Scanner Mode (Add Stock)
+        </h3>
+        <button class="close-btn" onclick="closeModal('restockModal')">✕</button>
+      </div>
+
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+        Scan or enter a suit barcode here to increment its available inventory count.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">Scan or Enter Suit Barcode:</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="restockBarcodeInput" class="form-control" placeholder="Scan barcode with gun (e.g. 8901001)..." autofocus>
+          <button class="btn btn-secondary" onclick="checkProductForRestock()">Lookup</button>
+        </div>
+      </div>
+
+      <!-- Scanned Product Preview Box -->
+      <div id="restockPreviewBox" style="display: none; padding: 14px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 14px;">
+        <h4 id="restockProdName" style="font-size: 15px; font-weight: 700; color: var(--brand-primary);">Blackish Premium Suit</h4>
+        <div style="font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;">
+          Current Stock: <span id="restockCurrentStock" style="font-weight: 700; color: var(--brand-gold);">100 Pieces</span> | 
+          Color: <span id="restockProdColor">Blackish</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Quantity to Add to Stock (Pieces):</label>
+        <input type="number" id="restockQtyInput" class="form-control" value="10" min="1">
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;">
+        <button class="btn btn-secondary" onclick="closeModal('restockModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="submitRestockScanner()">
+          <span>➕</span>
+          <span>Add to Inventory Stock</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Process Return & Refund Modal -->
+  <div id="returnModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--brand-red);">
+          🔄 Customer Return & Refund Processing
+        </h3>
+        <button class="close-btn" onclick="closeModal('returnModal')">✕</button>
+      </div>
+
+      <div style="padding: 12px; background: var(--bg-primary); border-radius: 8px; margin-bottom: 16px;">
+        <div style="font-size: 13.5px; font-weight: 700;" id="retModalSuitName">Blackish Premium Suit</div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+          Customer: <span id="retModalCustName">Muhammad Arslan</span> | Invoice: <span id="retModalInvNum">INV-1001</span> | 
+          Purchase Rate: <span id="retModalUnitPrice">Rs. 4,200</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Number of Suits to Return (Quantity):</label>
+        <input type="number" id="retModalQty" class="form-control" value="1" min="1" max="10">
+      </div>
+
+      <div class="form-label" style="margin-top: 12px;">What did the customer choose? Select Return Type:</div>
+      <div class="return-options-container">
+        <!-- Option 1: Suit Restock / Exchange -->
+        <div class="return-option-card selected" id="optSuitExchange" onclick="selectReturnType('SUIT_EXCHANGE')">
+          <div style="font-size: 24px;">👗</div>
+          <div style="font-weight: 700; font-size: 13.5px;">Suit Restock / Exchange</div>
+          <div style="font-size: 11px; color: var(--text-muted);">
+            The suit is added back into store inventory. Customer exchanges it for another suit.
+          </div>
+        </div>
+
+        <!-- Option 2: Cash Refund -->
+        <div class="return-option-card" id="optCashRefund" onclick="selectReturnType('CASH_REFUND')">
+          <div style="font-size: 24px;">💵</div>
+          <div style="font-weight: 700; font-size: 13.5px;">Cash / Payment Refund</div>
+          <div style="font-size: 11px; color: var(--text-muted);">
+            Cash is refunded directly to the customer. Ledger and expense records adjust automatically.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Reason for Return:</label>
+        <input type="text" id="retModalReason" class="form-control" placeholder="e.g. Size exchange, color preference, customer request...">
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;">
+        <button class="btn btn-secondary" onclick="closeModal('returnModal')">Cancel</button>
+        <button class="btn btn-danger" onclick="submitReturnProcess()">
+          <span>✅</span>
+          <span>Confirm Return Processing</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add New Product / Suit -->
+  <div id="addProductModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 700;">➕ Add New Suit / Fabric to Inventory</h3>
+        <button class="close-btn" onclick="closeModal('addProductModal')">✕</button>
+      </div>
+
+      <form id="addProductForm" onsubmit="submitNewProduct(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Product / Suit Name:</label>
+            <input type="text" id="newProdName" class="form-control" placeholder="e.g. Blackish Suit, Royal Boski..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Barcode / SKU:</label>
+            <input type="text" id="newProdBarcode" class="form-control" placeholder="Leave blank to auto-generate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category:</label>
+            <select id="newProdCategory" class="form-control">
+              <option value="Unstitched Fabric">Unstitched Fabric</option>
+              <option value="Ready-to-Wear">Ready-to-Wear</option>
+              <option value="Winter Collection">Winter Collection</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fabric Type:</label>
+            <input type="text" id="newProdFabric" class="form-control" placeholder="e.g. Wash & Wear, Cotton, Boski..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Color:</label>
+            <input type="text" id="newProdColor" class="form-control" placeholder="e.g. Blackish, White, Navy Blue..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cut / Size:</label>
+            <input type="text" id="newProdSize" class="form-control" value="4.5 Meters (Standard Cut)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cost Price (PKR):</label>
+            <input type="number" id="newProdCost" class="form-control" placeholder="2500" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Selling Price (PKR):</label>
+            <input type="number" id="newProdPrice" class="form-control" placeholder="4200" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Initial Stock Quantity (Pieces):</label>
+            <input type="number" id="newProdStock" class="form-control" placeholder="100" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Low Stock Alert Threshold:</label>
+            <input type="number" id="newProdMinAlert" class="form-control" value="10">
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('addProductModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save & Add to Stock</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Printable Thermal Receipt / Invoice Preview -->
+  <div id="receiptModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 style="font-size: 15px; font-weight: 700;">Print Thermal Receipt Preview</h3>
+        <button class="close-btn" onclick="closeModal('receiptModal')">✕</button>
+      </div>
+
+      <!-- Printable Thermal Receipt Container -->
+      <div id="printableReceiptArea" class="receipt-container">
+        <div class="receipt-header">
+          <div class="receipt-title">CLOTHING STORE</div>
+          <div style="font-size: 11px;">RETAIL & POS MANAGEMENT</div>
+          <div style="font-size: 10px;">Katchery Road, Gujranwala | +92 300 7654321</div>
+          <div class="receipt-divider"></div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px;">
+            <span>Inv #: <b id="recInvoiceNum">INV-1001</b></span>
+            <span>Date: <b id="recDate">2026-11-17</b></span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; margin-top: 2px;">
+            <span>Customer: <b id="recCustName">Muhammad Arslan</b></span>
+            <span>Phone: <b id="recCustPhone">03001234567</b></span>
+          </div>
+        </div>
+
+        <table class="receipt-table">
+          <thead>
+            <tr>
+              <th>Item Description</th>
+              <th>Qty</th>
+              <th>Rate</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="recItemsBody">
+            <!-- Dynamic items -->
+          </tbody>
+        </table>
+
+        <div class="receipt-divider"></div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+          <span>Subtotal:</span>
+          <span id="recSubtotal">Rs. 8,400</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+          <span>Discount:</span>
+          <span id="recDiscount">Rs. 0</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 14px; margin-top: 4px;">
+          <span>Net Payable:</span>
+          <span id="recGrandTotal">Rs. 8,400</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-top: 4px;">
+          <span>Cash Tendered:</span>
+          <span id="recPaid">Rs. 8,400</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 11px;">
+          <span>Change Returned:</span>
+          <span id="recChange">Rs. 0</span>
+        </div>
+
+        <div class="receipt-divider"></div>
+        <div style="text-align: center; font-size: 10px;" id="recFooterNote">
+          Thank you for choosing us! Suits can be exchanged within 7 days with original invoice.
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: space-between;">
+        <button class="btn btn-secondary" onclick="closeModal('receiptModal')">Close</button>
+        <button class="btn btn-primary" onclick="printReceipt()">
+          <span>🖨️</span>
+          <span>Print Thermal Receipt</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

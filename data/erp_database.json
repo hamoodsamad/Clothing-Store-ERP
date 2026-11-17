@@ -1,0 +1,33 @@
+{
+  "store_settings": {
+    "store_name": "Clothing Store",
+    "store_name_urdu": "Clothing Store",
+    "slogan": "Premium Fabrics & Apparel",
+    "address": "Lahore / Gujranwala, Pakistan",
+    "phone": "+92 300 0000000",
+    "email": "contact@clothingstore.com",
+    "tax_percentage": 0.0,
+    "currency": "PKR (Rs.)",
+    "invoice_footer": "Thank you for shopping at Clothing Store! Goods once sold can be exchanged or returned within 7 days with original invoice."
+  },
+  "products": [],
+  "customers": [],
+  "suppliers": [],
+  "invoices": [],
+  "estimates": [],
+  "purchases": [],
+  "expenses": [],
+  "sales_returns": [],
+  "purchase_returns": [],
+  "delivery_notes": [],
+  "agents": [
+    {
+      "id": "AGT-001",
+      "name": "Store Admin",
+      "role": "Owner / Admin",
+      "phone": "",
+      "email": "admin@clothingstore.com",
+      "status": "Active"
+    }
+  ]
+}
