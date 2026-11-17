@@ -2,30 +2,1104 @@
   "store_settings": {
     "store_name": "Clothing Store",
     "store_name_urdu": "Clothing Store",
-    "slogan": "Premium Fabrics & Apparel",
-    "address": "Lahore / Gujranwala, Pakistan",
-    "phone": "+92 300 0000000",
+    "slogan": "Premium Executive Fabrics, Designer Boski & Luxury Apparel",
+    "address": "Main Boulevard, Gulberg III, Lahore, Pakistan",
+    "phone": "+92 300 8472910 / 042-35789120",
     "email": "contact@clothingstore.com",
     "tax_percentage": 0.0,
     "currency": "PKR (Rs.)",
     "invoice_footer": "Thank you for shopping at Clothing Store! Goods once sold can be exchanged or returned within 7 days with original invoice."
   },
-  "products": [],
-  "customers": [],
-  "suppliers": [],
-  "invoices": [],
-  "estimates": [],
-  "purchases": [],
-  "expenses": [],
-  "sales_returns": [],
+  "products": [
+    {
+      "id": "PRD-1001",
+      "barcode": "8901001",
+      "name": "Imperial Super Wash & Wear Suit",
+      "category": "Unstitched Fabric",
+      "fabric": "Executive Poly-Viscose Blend",
+      "color": "Midnight Navy",
+      "size": "4.5 Meters",
+      "cost_price": 2600.0,
+      "selling_price": 4800.0,
+      "stock_quantity": 42,
+      "min_stock_alert": 10,
+      "supplier_id": "SUP-001",
+      "description": "Wrinkle-resistant premium fabric designed for corporate and executive year-round wear.",
+      "created_at": "2026-11-01 10:00:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1002",
+      "barcode": "8901002",
+      "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+      "category": "Pure Boski",
+      "fabric": "100% Spun Chinese Silk",
+      "color": "Cream Ivory",
+      "size": "7.0 Meters (Full Cut)",
+      "cost_price": 11500.0,
+      "selling_price": 17500.0,
+      "stock_quantity": 24,
+      "min_stock_alert": 8,
+      "supplier_id": "SUP-002",
+      "description": "Authentic 8-pound royal Chinese spun silk boski with signature fall and sheen.",
+      "created_at": "2026-11-01 10:15:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1003",
+      "barcode": "8901003",
+      "name": "Pasha Royal Sovereign Latha 4.5m",
+      "category": "Premium Latha",
+      "fabric": "100% Combed Egyptian Cotton",
+      "color": "Pearl White",
+      "size": "4.5 Meters",
+      "cost_price": 4200.0,
+      "selling_price": 6900.0,
+      "stock_quantity": 31,
+      "min_stock_alert": 10,
+      "supplier_id": "SUP-002",
+      "description": "Crisp executive white finish latha with stiff collar feel and royal luster.",
+      "created_at": "2026-11-01 10:30:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1004",
+      "barcode": "8901004",
+      "name": "Handcrafted Kashmiri Karandi Suit",
+      "category": "Winter Collection",
+      "fabric": "Pure Handwoven Karandi",
+      "color": "Slate Charcoal",
+      "size": "4.5 Meters",
+      "cost_price": 5100.0,
+      "selling_price": 8400.0,
+      "stock_quantity": 19,
+      "min_stock_alert": 6,
+      "supplier_id": "SUP-003",
+      "description": "Traditional warm winter karandi featuring rich texture and natural thermal retention.",
+      "created_at": "2026-11-01 10:45:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1005",
+      "barcode": "8901005",
+      "name": "Executive Tropical Wool Suiting",
+      "category": "Suiting & Tuxedo",
+      "fabric": "Italian Worsted Wool 120s",
+      "color": "Deep Olive Green",
+      "size": "4.0 Meters",
+      "cost_price": 6800.0,
+      "selling_price": 11200.0,
+      "stock_quantity": 16,
+      "min_stock_alert": 5,
+      "supplier_id": "SUP-001",
+      "description": "Lightweight breathable super 120s tropical wool for formal 2-piece and 3-piece suits.",
+      "created_at": "2026-11-01 11:00:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1006",
+      "barcode": "8901006",
+      "name": "Egyptian Giza Luxury Cotton",
+      "category": "Unstitched Fabric",
+      "fabric": "Extra Long Staple Giza 87",
+      "color": "Sky Blue",
+      "size": "4.5 Meters",
+      "cost_price": 3400.0,
+      "selling_price": 5600.0,
+      "stock_quantity": 48,
+      "min_stock_alert": 12,
+      "supplier_id": "SUP-003",
+      "description": "Silky-smooth breathable staple cotton with liquid ammonia finish.",
+      "created_at": "2026-11-01 11:15:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1007",
+      "barcode": "8901007",
+      "name": "Festive Embroidered Kurta Fabric",
+      "category": "Kurta & Shalwar",
+      "fabric": "Raw Silk & Resham Thread",
+      "color": "Emerald Green",
+      "size": "2.5 Meters",
+      "cost_price": 3900.0,
+      "selling_price": 6500.0,
+      "stock_quantity": 22,
+      "min_stock_alert": 5,
+      "supplier_id": "SUP-002",
+      "description": "Intricate neck and cuff resham embroidery on textured raw silk background.",
+      "created_at": "2026-11-01 11:30:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1008",
+      "barcode": "8901008",
+      "name": "Sapphire Handloom Khaddar Cut",
+      "category": "Winter Collection",
+      "fabric": "100% Handloom Spun Khaddar",
+      "color": "Earth Brown",
+      "size": "7.0 Meters",
+      "cost_price": 2100.0,
+      "selling_price": 3800.0,
+      "stock_quantity": 36,
+      "min_stock_alert": 10,
+      "supplier_id": "SUP-001",
+      "description": "Cozy rustic hand-spun traditional khaddar for classic winter shalwar kameez.",
+      "created_at": "2026-11-01 11:45:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1009",
+      "barcode": "8901009",
+      "name": "Signature Black Tuxedo Fabric",
+      "category": "Suiting & Tuxedo",
+      "fabric": "Midnight Wool Cashmere Blend",
+      "color": "Jet Black",
+      "size": "4.0 Meters",
+      "cost_price": 7500.0,
+      "selling_price": 13000.0,
+      "stock_quantity": 14,
+      "min_stock_alert": 4,
+      "supplier_id": "SUP-001",
+      "description": "Ultra-rich jet black cashmere-wool blend with satin sheen for bespoke tuxedos.",
+      "created_at": "2026-11-01 12:00:00",
+      "updated_at": "2026-11-17 12:00:00"
+    },
+    {
+      "id": "PRD-1010",
+      "barcode": "8901010",
+      "name": "Shadow Weave Classic Shalwar Kameez",
+      "category": "Unstitched Fabric",
+      "fabric": "Micro-Poly Viscose",
+      "color": "Silver Grey",
+      "size": "4.5 Meters",
+      "cost_price": 2800.0,
+      "selling_price": 4950.0,
+      "stock_quantity": 35,
+      "min_stock_alert": 10,
+      "supplier_id": "SUP-003",
+      "description": "Double-tone shadow weave fabric with supple drape and durable weave.",
+      "created_at": "2026-11-01 12:15:00",
+      "updated_at": "2026-11-17 12:00:00"
+    }
+  ],
+  "customers": [
+    {
+      "id": "CUST-001",
+      "name": "Malik Tariq Mehmood",
+      "phone": "+92 300 8472911",
+      "address": "House 14, Block C, Model Town",
+      "city": "Lahore",
+      "total_purchases": 58400.0,
+      "total_orders": 5,
+      "created_at": "2026-11-01 11:30:00"
+    },
+    {
+      "id": "CUST-002",
+      "name": "Sheikh Farhan Ahmed",
+      "phone": "+92 321 4455667",
+      "address": "42-Civil Lines",
+      "city": "Gujranwala",
+      "total_purchases": 42600.0,
+      "total_orders": 3,
+      "created_at": "2026-11-02 14:20:00"
+    },
+    {
+      "id": "CUST-003",
+      "name": "Chaudhry Bilal Warraich",
+      "phone": "+92 333 5511223",
+      "address": "Street 9, Sector F-7/2",
+      "city": "Islamabad",
+      "total_purchases": 86200.0,
+      "total_orders": 6,
+      "created_at": "2026-11-03 16:45:00"
+    },
+    {
+      "id": "CUST-004",
+      "name": "Syed Ali Raza Rizvi",
+      "phone": "+92 302 9988776",
+      "address": "Khayaban-e-Shamsheer, Phase 5, DHA",
+      "city": "Karachi",
+      "total_purchases": 34500.0,
+      "total_orders": 2,
+      "created_at": "2026-11-04 12:10:00"
+    },
+    {
+      "id": "CUST-005",
+      "name": "Mian Usman Javed",
+      "phone": "+92 345 7711990",
+      "address": "Eden Gardens, Canal Road",
+      "city": "Faisalabad",
+      "total_purchases": 29800.0,
+      "total_orders": 3,
+      "created_at": "2026-11-05 15:30:00"
+    },
+    {
+      "id": "CUST-006",
+      "name": "Haji Abdul Rehman",
+      "phone": "+92 312 6655443",
+      "address": "12-Main Market, Gulberg II",
+      "city": "Lahore",
+      "total_purchases": 67900.0,
+      "total_orders": 4,
+      "created_at": "2026-11-06 17:00:00"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "SUP-001",
+      "name": "Kohinoor Textile Mills Ltd",
+      "contact_person": "M. Zubair Khan",
+      "phone": "+92 42 35910001",
+      "address": "Industrial Estate, Kot Lakhpat, Lahore",
+      "balance_payable": 120000.0,
+      "total_purchased": 650000.0,
+      "created_at": "2026-11-01 09:00:00"
+    },
+    {
+      "id": "SUP-002",
+      "name": "Pasha Fabrics Wholesale Corp",
+      "contact_person": "Rashid Pasha",
+      "phone": "+92 21 34520990",
+      "address": "Cloth Market, M.A Jinnah Road, Karachi",
+      "balance_payable": 85000.0,
+      "total_purchased": 420000.0,
+      "created_at": "2026-11-01 09:30:00"
+    },
+    {
+      "id": "SUP-003",
+      "name": "Nishat Linen Master Distributors",
+      "contact_person": "Adnan Sheikh",
+      "phone": "+92 41 8765432",
+      "address": "Nishatabad Yarn Market, Faisalabad",
+      "balance_payable": 60000.0,
+      "total_purchased": 380000.0,
+      "created_at": "2026-11-01 10:00:00"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-1001",
+      "invoice_number": "INV-1001",
+      "customer_id": "CUST-001",
+      "customer_name": "Malik Tariq Mehmood",
+      "customer_phone": "+92 300 8472911",
+      "date": "2026-11-02",
+      "items": [
+        {
+          "product_id": "PRD-1001",
+          "barcode": "8901001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "color": "Midnight Navy",
+          "quantity": 1,
+          "unit_cost": 2600.0,
+          "unit_price": 4800.0,
+          "total": 4800.0,
+          "profit": 2200.0
+        },
+        {
+          "product_id": "PRD-1003",
+          "barcode": "8901003",
+          "name": "Pasha Royal Sovereign Latha 4.5m",
+          "color": "Pearl White",
+          "quantity": 1,
+          "unit_cost": 4200.0,
+          "unit_price": 6900.0,
+          "total": 6900.0,
+          "profit": 2700.0
+        }
+      ],
+      "subtotal": 11700.0,
+      "discount": 500.0,
+      "tax": 0.0,
+      "grand_total": 11200.0,
+      "total_cost": 6800.0,
+      "total_profit": 4400.0,
+      "payment_method": "Cash",
+      "amount_paid": 12000.0,
+      "change_due": 800.0,
+      "status": "Paid",
+      "notes": "VIP Loyal Customer discount applied"
+    },
+    {
+      "id": "INV-1002",
+      "invoice_number": "INV-1002",
+      "customer_id": "CUST-002",
+      "customer_name": "Sheikh Farhan Ahmed",
+      "customer_phone": "+92 321 4455667",
+      "date": "2026-11-05",
+      "items": [
+        {
+          "product_id": "PRD-1002",
+          "barcode": "8901002",
+          "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+          "color": "Cream Ivory",
+          "quantity": 1,
+          "unit_cost": 11500.0,
+          "unit_price": 17500.0,
+          "total": 17500.0,
+          "profit": 6000.0
+        },
+        {
+          "product_id": "PRD-1006",
+          "barcode": "8901006",
+          "name": "Egyptian Giza Luxury Cotton",
+          "color": "Sky Blue",
+          "quantity": 1,
+          "unit_cost": 3400.0,
+          "unit_price": 5600.0,
+          "total": 5600.0,
+          "profit": 2200.0
+        }
+      ],
+      "subtotal": 23100.0,
+      "discount": 0.0,
+      "tax": 0.0,
+      "grand_total": 23100.0,
+      "total_cost": 14900.0,
+      "total_profit": 8200.0,
+      "payment_method": "Online Transfer",
+      "amount_paid": 23100.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Paid via HBL Raast Transfer"
+    },
+    {
+      "id": "INV-1003",
+      "invoice_number": "INV-1003",
+      "customer_id": "CUST-003",
+      "customer_name": "Chaudhry Bilal Warraich",
+      "customer_phone": "+92 333 5511223",
+      "date": "2026-11-08",
+      "items": [
+        {
+          "product_id": "PRD-1004",
+          "barcode": "8901004",
+          "name": "Handcrafted Kashmiri Karandi Suit",
+          "color": "Slate Charcoal",
+          "quantity": 2,
+          "unit_cost": 5100.0,
+          "unit_price": 8400.0,
+          "total": 16800.0,
+          "profit": 6600.0
+        },
+        {
+          "product_id": "PRD-1005",
+          "barcode": "8901005",
+          "name": "Executive Tropical Wool Suiting",
+          "color": "Deep Olive Green",
+          "quantity": 1,
+          "unit_cost": 6800.0,
+          "unit_price": 11200.0,
+          "total": 11200.0,
+          "profit": 4400.0
+        }
+      ],
+      "subtotal": 28000.0,
+      "discount": 1000.0,
+      "tax": 0.0,
+      "grand_total": 27000.0,
+      "total_cost": 17000.0,
+      "total_profit": 10000.0,
+      "payment_method": "Card",
+      "amount_paid": 27000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Paid via Meezan Visa Platinum"
+    },
+    {
+      "id": "INV-1004",
+      "invoice_number": "INV-1004",
+      "customer_id": null,
+      "customer_name": "Dr. Salman Farooqi (Walk-in)",
+      "customer_phone": "+92 301 2345678",
+      "date": "2026-11-10",
+      "items": [
+        {
+          "product_id": "PRD-1007",
+          "barcode": "8901007",
+          "name": "Festive Embroidered Kurta Fabric",
+          "color": "Emerald Green",
+          "quantity": 2,
+          "unit_cost": 3900.0,
+          "unit_price": 6500.0,
+          "total": 13000.0,
+          "profit": 5200.0
+        },
+        {
+          "product_id": "PRD-1008",
+          "barcode": "8901008",
+          "name": "Sapphire Handloom Khaddar Cut",
+          "color": "Earth Brown",
+          "quantity": 1,
+          "unit_cost": 2100.0,
+          "unit_price": 3800.0,
+          "total": 3800.0,
+          "profit": 1700.0
+        }
+      ],
+      "subtotal": 16800.0,
+      "discount": 300.0,
+      "tax": 0.0,
+      "grand_total": 16500.0,
+      "total_cost": 9900.0,
+      "total_profit": 6600.0,
+      "payment_method": "Cash",
+      "amount_paid": 16500.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Counter cash sale"
+    },
+    {
+      "id": "INV-1005",
+      "invoice_number": "INV-1005",
+      "customer_id": "CUST-004",
+      "customer_name": "Syed Ali Raza Rizvi",
+      "customer_phone": "+92 302 9988776",
+      "date": "2026-11-12",
+      "items": [
+        {
+          "product_id": "PRD-1009",
+          "barcode": "8901009",
+          "name": "Signature Black Tuxedo Fabric",
+          "color": "Jet Black",
+          "quantity": 1,
+          "unit_cost": 7500.0,
+          "unit_price": 13000.0,
+          "total": 13000.0,
+          "profit": 5500.0
+        },
+        {
+          "product_id": "PRD-1001",
+          "barcode": "8901001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "color": "Midnight Navy",
+          "quantity": 1,
+          "unit_cost": 2600.0,
+          "unit_price": 4800.0,
+          "total": 4800.0,
+          "profit": 2200.0
+        }
+      ],
+      "subtotal": 17800.0,
+      "discount": 0.0,
+      "tax": 0.0,
+      "grand_total": 17800.0,
+      "total_cost": 10100.0,
+      "total_profit": 7700.0,
+      "payment_method": "Card",
+      "amount_paid": 17800.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Dispatched to Karachi via TCS"
+    },
+    {
+      "id": "INV-1006",
+      "invoice_number": "INV-1006",
+      "customer_id": "CUST-005",
+      "customer_name": "Mian Usman Javed",
+      "customer_phone": "+92 345 7711990",
+      "date": "2026-11-14",
+      "items": [
+        {
+          "product_id": "PRD-1006",
+          "barcode": "8901006",
+          "name": "Egyptian Giza Luxury Cotton",
+          "color": "Sky Blue",
+          "quantity": 2,
+          "unit_cost": 3400.0,
+          "unit_price": 5600.0,
+          "total": 11200.0,
+          "profit": 4400.0
+        },
+        {
+          "product_id": "PRD-1010",
+          "barcode": "8901010",
+          "name": "Shadow Weave Classic Shalwar Kameez",
+          "color": "Silver Grey",
+          "quantity": 1,
+          "unit_cost": 2800.0,
+          "unit_price": 4950.0,
+          "total": 4950.0,
+          "profit": 2150.0
+        }
+      ],
+      "subtotal": 16150.0,
+      "discount": 450.0,
+      "tax": 0.0,
+      "grand_total": 15700.0,
+      "total_cost": 9600.0,
+      "total_profit": 6100.0,
+      "payment_method": "Cash",
+      "amount_paid": 16000.0,
+      "change_due": 300.0,
+      "status": "Paid",
+      "notes": "Counter sale"
+    },
+    {
+      "id": "INV-1007",
+      "invoice_number": "INV-1007",
+      "customer_id": "CUST-006",
+      "customer_name": "Haji Abdul Rehman",
+      "customer_phone": "+92 312 6655443",
+      "date": "2026-11-16",
+      "items": [
+        {
+          "product_id": "PRD-1002",
+          "barcode": "8901002",
+          "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+          "color": "Cream Ivory",
+          "quantity": 1,
+          "unit_cost": 11500.0,
+          "unit_price": 17500.0,
+          "total": 17500.0,
+          "profit": 6000.0
+        },
+        {
+          "product_id": "PRD-1003",
+          "barcode": "8901003",
+          "name": "Pasha Royal Sovereign Latha 4.5m",
+          "color": "Pearl White",
+          "quantity": 2,
+          "unit_cost": 4200.0,
+          "unit_price": 6900.0,
+          "total": 13800.0,
+          "profit": 5400.0
+        }
+      ],
+      "subtotal": 31300.0,
+      "discount": 1300.0,
+      "tax": 0.0,
+      "grand_total": 30000.0,
+      "total_cost": 19900.0,
+      "total_profit": 10100.0,
+      "payment_method": "Online Transfer",
+      "amount_paid": 30000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Wedding package bulk purchase"
+    },
+    {
+      "id": "INV-1008",
+      "invoice_number": "INV-1008",
+      "customer_id": null,
+      "customer_name": "Engr. Kamran Akram (Walk-in)",
+      "customer_phone": "+92 300 7766554",
+      "date": "2026-11-17",
+      "items": [
+        {
+          "product_id": "PRD-1004",
+          "barcode": "8901004",
+          "name": "Handcrafted Kashmiri Karandi Suit",
+          "color": "Slate Charcoal",
+          "quantity": 1,
+          "unit_cost": 5100.0,
+          "unit_price": 8400.0,
+          "total": 8400.0,
+          "profit": 3300.0
+        },
+        {
+          "product_id": "PRD-1001",
+          "barcode": "8901001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "color": "Midnight Navy",
+          "quantity": 1,
+          "unit_cost": 2600.0,
+          "unit_price": 4800.0,
+          "total": 4800.0,
+          "profit": 2200.0
+        }
+      ],
+      "subtotal": 13200.0,
+      "discount": 200.0,
+      "tax": 0.0,
+      "grand_total": 13000.0,
+      "total_cost": 7700.0,
+      "total_profit": 5300.0,
+      "payment_method": "Cash",
+      "amount_paid": 13000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Today's morning register checkout"
+    },
+    {
+      "id": "INV-1009",
+      "invoice_number": "INV-1009",
+      "customer_id": "CUST-001",
+      "customer_name": "Malik Tariq Mehmood",
+      "customer_phone": "+92 300 8472911",
+      "date": "2026-11-04",
+      "items": [
+        {
+          "product_id": "PRD-1002",
+          "barcode": "8901002",
+          "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+          "color": "Cream Ivory",
+          "quantity": 2,
+          "unit_cost": 11500.0,
+          "unit_price": 17500.0,
+          "total": 35000.0,
+          "profit": 12000.0
+        },
+        {
+          "product_id": "PRD-1005",
+          "barcode": "8901005",
+          "name": "Executive Tropical Wool Suiting",
+          "color": "Deep Olive Green",
+          "quantity": 1,
+          "unit_cost": 6800.0,
+          "unit_price": 11200.0,
+          "total": 11200.0,
+          "profit": 4400.0
+        }
+      ],
+      "subtotal": 46200.0,
+      "discount": 1200.0,
+      "tax": 0.0,
+      "grand_total": 45000.0,
+      "total_cost": 29800.0,
+      "total_profit": 15200.0,
+      "payment_method": "Online Transfer",
+      "amount_paid": 45000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Family suiting bulk order"
+    },
+    {
+      "id": "INV-1010",
+      "invoice_number": "INV-1010",
+      "customer_id": "CUST-003",
+      "customer_name": "Chaudhry Bilal Warraich",
+      "customer_phone": "+92 333 5511223",
+      "date": "2026-11-07",
+      "items": [
+        {
+          "product_id": "PRD-1009",
+          "barcode": "8901009",
+          "name": "Signature Black Tuxedo Fabric",
+          "color": "Jet Black",
+          "quantity": 2,
+          "unit_cost": 7500.0,
+          "unit_price": 13000.0,
+          "total": 26000.0,
+          "profit": 11000.0
+        },
+        {
+          "product_id": "PRD-1003",
+          "barcode": "8901003",
+          "name": "Pasha Royal Sovereign Latha 4.5m",
+          "color": "Pearl White",
+          "quantity": 2,
+          "unit_cost": 4200.0,
+          "unit_price": 6900.0,
+          "total": 13800.0,
+          "profit": 5400.0
+        }
+      ],
+      "subtotal": 39800.0,
+      "discount": 800.0,
+      "tax": 0.0,
+      "grand_total": 39000.0,
+      "total_cost": 23400.0,
+      "total_profit": 15600.0,
+      "payment_method": "Card",
+      "amount_paid": 39000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Formal corporate black-tie package"
+    },
+    {
+      "id": "INV-1011",
+      "invoice_number": "INV-1011",
+      "customer_id": "CUST-002",
+      "customer_name": "Sheikh Farhan Ahmed",
+      "customer_phone": "+92 321 4455667",
+      "date": "2026-11-09",
+      "items": [
+        {
+          "product_id": "PRD-1001",
+          "barcode": "8901001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "color": "Midnight Navy",
+          "quantity": 3,
+          "unit_cost": 2600.0,
+          "unit_price": 4800.0,
+          "total": 14400.0,
+          "profit": 6600.0
+        },
+        {
+          "product_id": "PRD-1006",
+          "barcode": "8901006",
+          "name": "Egyptian Giza Luxury Cotton",
+          "color": "Sky Blue",
+          "quantity": 2,
+          "unit_cost": 3400.0,
+          "unit_price": 5600.0,
+          "total": 11200.0,
+          "profit": 4400.0
+        }
+      ],
+      "subtotal": 25600.0,
+      "discount": 600.0,
+      "tax": 0.0,
+      "grand_total": 25000.0,
+      "total_cost": 14600.0,
+      "total_profit": 10400.0,
+      "payment_method": "Cash",
+      "amount_paid": 25000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Cash register settlement"
+    },
+    {
+      "id": "INV-1012",
+      "invoice_number": "INV-1012",
+      "customer_id": "CUST-004",
+      "customer_name": "Syed Ali Raza Rizvi",
+      "customer_phone": "+92 302 9988776",
+      "date": "2026-11-11",
+      "items": [
+        {
+          "product_id": "PRD-1004",
+          "barcode": "8901004",
+          "name": "Handcrafted Kashmiri Karandi Suit",
+          "color": "Slate Charcoal",
+          "quantity": 3,
+          "unit_cost": 5100.0,
+          "unit_price": 8400.0,
+          "total": 25200.0,
+          "profit": 9900.0
+        },
+        {
+          "product_id": "PRD-1007",
+          "barcode": "8901007",
+          "name": "Festive Embroidered Kurta Fabric",
+          "color": "Emerald Green",
+          "quantity": 2,
+          "unit_cost": 3900.0,
+          "unit_price": 6500.0,
+          "total": 13000.0,
+          "profit": 5200.0
+        }
+      ],
+      "subtotal": 38200.0,
+      "discount": 1200.0,
+      "tax": 0.0,
+      "grand_total": 37000.0,
+      "total_cost": 23100.0,
+      "total_profit": 13900.0,
+      "payment_method": "Online Transfer",
+      "amount_paid": 37000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Karachi client courier consignment"
+    },
+    {
+      "id": "INV-1013",
+      "invoice_number": "INV-1013",
+      "customer_id": "CUST-006",
+      "customer_name": "Haji Abdul Rehman",
+      "customer_phone": "+92 312 6655443",
+      "date": "2026-11-13",
+      "items": [
+        {
+          "product_id": "PRD-1002",
+          "barcode": "8901002",
+          "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+          "color": "Cream Ivory",
+          "quantity": 2,
+          "unit_cost": 11500.0,
+          "unit_price": 17500.0,
+          "total": 35000.0,
+          "profit": 12000.0
+        },
+        {
+          "product_id": "PRD-1008",
+          "barcode": "8901008",
+          "name": "Sapphire Handloom Khaddar Cut",
+          "color": "Earth Brown",
+          "quantity": 3,
+          "unit_cost": 2100.0,
+          "unit_price": 3800.0,
+          "total": 11400.0,
+          "profit": 5100.0
+        }
+      ],
+      "subtotal": 46400.0,
+      "discount": 1400.0,
+      "tax": 0.0,
+      "grand_total": 45000.0,
+      "total_cost": 29300.0,
+      "total_profit": 15700.0,
+      "payment_method": "Cash",
+      "amount_paid": 45000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "Winter gift sets"
+    },
+    {
+      "id": "INV-1014",
+      "invoice_number": "INV-1014",
+      "customer_id": "CUST-005",
+      "customer_name": "Mian Usman Javed",
+      "customer_phone": "+92 345 7711990",
+      "date": "2026-11-15",
+      "items": [
+        {
+          "product_id": "PRD-1005",
+          "barcode": "8901005",
+          "name": "Executive Tropical Wool Suiting",
+          "color": "Deep Olive Green",
+          "quantity": 2,
+          "unit_cost": 6800.0,
+          "unit_price": 11200.0,
+          "total": 22400.0,
+          "profit": 8800.0
+        },
+        {
+          "product_id": "PRD-1010",
+          "barcode": "8901010",
+          "name": "Shadow Weave Classic Shalwar Kameez",
+          "color": "Silver Grey",
+          "quantity": 3,
+          "unit_cost": 2800.0,
+          "unit_price": 4950.0,
+          "total": 14850.0,
+          "profit": 6450.0
+        }
+      ],
+      "subtotal": 37250.0,
+      "discount": 1250.0,
+      "tax": 0.0,
+      "grand_total": 36000.0,
+      "total_cost": 22000.0,
+      "total_profit": 14000.0,
+      "payment_method": "Card",
+      "amount_paid": 36000.0,
+      "change_due": 0.0,
+      "status": "Paid",
+      "notes": "POS Terminal transaction"
+    }
+  ],
+  "estimates": [
+    {
+      "id": "EST-1001",
+      "estimate_number": "EST-1001",
+      "customer_name": "DG Khan Cement Executive Uniforms",
+      "customer_phone": "+92 300 5544332",
+      "date": "2026-11-10",
+      "valid_until": "2026-11-25",
+      "items": [
+        {
+          "product_id": "PRD-1001",
+          "barcode": "8901001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "color": "Midnight Navy",
+          "quantity": 25,
+          "unit_cost": 2600.0,
+          "unit_price": 4800.0,
+          "total": 120000.0,
+          "profit": 55000.0
+        }
+      ],
+      "grand_total": 120000.0,
+      "status": "Pending",
+      "notes": "Corporate bulk formal wear quotation for management staff"
+    },
+    {
+      "id": "EST-1002",
+      "estimate_number": "EST-1002",
+      "customer_name": "Sardar Wedding Boutique",
+      "customer_phone": "+92 333 9988112",
+      "date": "2026-11-14",
+      "valid_until": "2026-11-30",
+      "items": [
+        {
+          "product_id": "PRD-1002",
+          "barcode": "8901002",
+          "name": "Original Silk Boski 8lb (6-Star Heavy Cut)",
+          "color": "Cream Ivory",
+          "quantity": 4,
+          "unit_cost": 11500.0,
+          "unit_price": 17500.0,
+          "total": 70000.0,
+          "profit": 24000.0
+        }
+      ],
+      "grand_total": 70000.0,
+      "status": "Pending",
+      "notes": "Groom & Brothers festive silk collection proposal"
+    }
+  ],
+  "purchases": [
+    {
+      "id": "PO-1001",
+      "po_number": "PO-1001",
+      "supplier_id": "SUP-001",
+      "supplier_name": "Kohinoor Textile Mills Ltd",
+      "date": "2026-11-01",
+      "items": [
+        {
+          "product_id": "PRD-1001",
+          "name": "Imperial Super Wash & Wear Suit",
+          "quantity": 50,
+          "unit_cost": 2600.0,
+          "total": 130000.0
+        }
+      ],
+      "grand_total": 130000.0,
+      "paid_amount": 58500,
+      "due_amount": 71500.0,
+      "status": "Received",
+      "notes": "Bulk seasonal restock of executive suiting rolls"
+    },
+    {
+      "id": "PO-1002",
+      "po_number": "PO-1002",
+      "supplier_id": "SUP-002",
+      "supplier_name": "Pasha Fabrics Wholesale Corp",
+      "date": "2026-11-04",
+      "items": [
+        {
+          "product_id": "PRD-1003",
+          "name": "Pasha Royal Sovereign Latha 4.5m",
+          "quantity": 30,
+          "unit_cost": 4200.0,
+          "total": 126000.0
+        }
+      ],
+      "grand_total": 126000.0,
+      "paid_amount": 56700,
+      "due_amount": 69300.0,
+      "status": "Received",
+      "notes": "Direct warehouse consignment of combed latha"
+    },
+    {
+      "id": "PO-1003",
+      "po_number": "PO-1003",
+      "supplier_id": "SUP-003",
+      "supplier_name": "Nishat Linen Master Distributors",
+      "date": "2026-11-09",
+      "items": [
+        {
+          "product_id": "PRD-1006",
+          "name": "Egyptian Giza Luxury Cotton",
+          "quantity": 40,
+          "unit_cost": 3400.0,
+          "total": 136000.0
+        }
+      ],
+      "grand_total": 136000.0,
+      "paid_amount": 61200,
+      "due_amount": 74800.0,
+      "status": "Received",
+      "notes": "Full advance settlement for luxury Egyptian giza"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "EXP-1001",
+      "category": "Showroom Electricity",
+      "amount": 28500.0,
+      "date": "2026-11-03",
+      "paid_by": "Cash Counter",
+      "description": "LESCO Commercial Showroom Electricity Bill"
+    },
+    {
+      "id": "EXP-1002",
+      "category": "Packaging & Luxury Carry Bags",
+      "amount": 12000.0,
+      "date": "2026-11-07",
+      "paid_by": "Admin Card",
+      "description": "500 Luxury Gold Foil Suit Boxes & Carry Bags"
+    },
+    {
+      "id": "EXP-1003",
+      "category": "Staff Hospitality & Refreshments",
+      "amount": 6500.0,
+      "date": "2026-11-12",
+      "paid_by": "Cash Counter",
+      "description": "Showroom guest coffee, tea & daily staff hospitality"
+    },
+    {
+      "id": "EXP-1004",
+      "category": "Cloud ERP & Gigabit Internet",
+      "amount": 3800.0,
+      "date": "2026-11-15",
+      "paid_by": "Online Transfer",
+      "description": "Dedicated fiber optic connection for ERP & surveillance"
+    }
+  ],
+  "sales_returns": [
+    {
+      "id": "RET-0001",
+      "invoice_id": "INV-1003",
+      "customer_name": "Chaudhry Bilal Warraich",
+      "product_id": "PRD-1004",
+      "product_name": "Handcrafted Kashmiri Karandi Suit",
+      "quantity": 1,
+      "refund_amount": 8400.0,
+      "return_type": "Suit Restock / Exchange",
+      "reason": "Customer requested color shade swap from Slate Charcoal to Midnight Navy",
+      "date": "2026-11-14"
+    },
+    {
+      "id": "RET-0002",
+      "invoice_id": "INV-1004",
+      "customer_name": "Dr. Salman Farooqi (Walk-in)",
+      "product_id": "PRD-1008",
+      "product_name": "Sapphire Handloom Khaddar Cut",
+      "quantity": 1,
+      "refund_amount": 3800.0,
+      "return_type": "Cash / Payment Refund",
+      "reason": "Fabric cut length requirement changed by personal master tailor",
+      "date": "2026-11-16"
+    }
+  ],
   "purchase_returns": [],
-  "delivery_notes": [],
+  "delivery_notes": [
+    {
+      "id": "DN-1001",
+      "note_number": "DN-1001",
+      "invoice_id": "INV-1002",
+      "customer_name": "Sheikh Farhan Ahmed",
+      "customer_phone": "+92 321 4455667",
+      "delivery_address": "42-Civil Lines, Gujranwala",
+      "courier": "TCS Express",
+      "tracking_number": "TCS-99281742",
+      "status": "Delivered",
+      "date": "2026-11-06"
+    },
+    {
+      "id": "DN-1002",
+      "note_number": "DN-1002",
+      "invoice_id": "INV-1005",
+      "customer_name": "Syed Ali Raza Rizvi",
+      "customer_phone": "+92 302 9988776",
+      "delivery_address": "Khayaban-e-Shamsheer, Phase 5, DHA, Karachi",
+      "courier": "M&P Courier",
+      "tracking_number": "MP-44810294",
+      "status": "In Transit",
+      "date": "2026-11-13"
+    },
+    {
+      "id": "DN-1003",
+      "note_number": "DN-1003",
+      "invoice_id": "INV-1007",
+      "customer_name": "Haji Abdul Rehman",
+      "customer_phone": "+92 312 6655443",
+      "delivery_address": "12-Main Market, Gulberg II, Lahore",
+      "courier": "Store Express Rider",
+      "tracking_number": "RIDER-012",
+      "status": "Delivered",
+      "date": "2026-11-16"
+    }
+  ],
   "agents": [
     {
       "id": "AGT-001",
       "name": "Store Admin",
       "role": "Owner / Admin",
-      "phone": "",
+      "phone": "+92 300 8472910",
       "email": "admin@clothingstore.com",
       "status": "Active"
     }
